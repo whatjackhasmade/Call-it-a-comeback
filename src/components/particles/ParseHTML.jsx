@@ -9,7 +9,8 @@ const config = {
     if (attribs && attribs.href) {
       let { href } = attribs
 
-      if (href) return <ReactAnchor attribs={attribs} children={children} />
+      if (href && children)
+        return <ReactAnchor attribs={attribs} children={children} />
     }
   },
 }
@@ -17,8 +18,18 @@ const config = {
 const ReactAnchor = ({ attribs, children }) => {
   let { href } = attribs
   href = useRelative(href)
-  if (isInternal(href)) return <Link to={`${href}`}>{children[0].data}</Link>
-  if (!isInternal(href)) return <a href={`${href}`}>{children[0].data}</a>
+  if (isInternal(href))
+    return (
+      <Link to={`${href}`}>
+        {children && children.length > 0 && children[0].data}
+      </Link>
+    )
+  if (!isInternal(href))
+    return (
+      <a href={`${href}`}>
+        {children && children.length > 0 && children[0].data}
+      </a>
+    )
 }
 
 const ParseHTML = html => {
