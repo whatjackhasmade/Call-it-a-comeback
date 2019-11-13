@@ -10,6 +10,11 @@ require(`dotenv`).config({
 })
 
 module.exports = {
+  siteMetadata: {
+    title: `WhatJackHasMade`,
+    siteUrl: `https://whatjackhasmade.co.uk`,
+    description: `Award winning freelance fullstack website developer`,
+  },
   plugins: [
     // Simple config, passing URL
     {
