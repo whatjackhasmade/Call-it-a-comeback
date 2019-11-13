@@ -2,6 +2,8 @@ import React from "react"
 import Helmet from "react-helmet"
 
 const SEO = ({ data }) => {
+  if (!data.seo) return null
+
   const {
     isBlog,
     metaDesc,
