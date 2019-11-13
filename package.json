@@ -1,30 +1,52 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "whatjackhasmade-gatsby",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "A 🔥 Gatsby setup",
+  "version": "2.0.0",
+  "author": "Jack Pritchard (@whatjackhasmade)",
   "dependencies": {
+    "dotenv": "8.1.0",
     "gatsby": "^2.17.11",
-    "gatsby-image": "^2.2.31",
-    "gatsby-plugin-manifest": "^2.2.27",
-    "gatsby-plugin-offline": "^3.0.19",
-    "gatsby-plugin-react-helmet": "^3.1.14",
-    "gatsby-plugin-sharp": "^2.2.37",
-    "gatsby-source-filesystem": "^2.1.36",
-    "gatsby-transformer-sharp": "^2.3.3",
+    "gatsby-plugin-catch-links": "2.1.9",
+    "gatsby-plugin-favicon": "3.1.6",
+    "gatsby-plugin-google-analytics": "2.1.16",
+    "gatsby-plugin-hotjar": "1.0.1",
+    "gatsby-plugin-html-attributes": "1.0.5",
+    "gatsby-plugin-layout": "1.1.7",
+    "gatsby-plugin-lodash": "3.1.7",
+    "gatsby-plugin-netlify": "2.1.13",
+    "gatsby-plugin-offline": "3.0.6",
+    "gatsby-plugin-polyfill-io": "1.1.0",
+    "gatsby-plugin-react-helmet": "3.1.7",
+    "gatsby-plugin-react-svg": "2.1.2",
+    "gatsby-plugin-robots-txt": "1.5.0",
+    "gatsby-plugin-sitemap": "2.2.12",
+    "gatsby-plugin-styled-components": "3.1.5",
+    "gatsby-source-graphql": "^2.1.22",
+    "html-react-parser": "0.9.1",
+    "html5-device-mockups": "3.2.1",
+    "intersection-observer": "0.7.0",
+    "mailtoui": "1.0.2",
+    "moment": "2.24.0",
+    "normalize.css": "8.0.1",
+    "prettier": "^1.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
+    "react-breakpoints": "3.0.3",
     "react-dom": "^16.11.0",
-    "react-helmet": "^5.2.1"
+    "react-grid-system": "5.0.2",
+    "react-helmet": "^5.2.1",
+    "react-intersection-observer": "8.24.2",
+    "react-lazy-load": "3.0.13",
+    "react-slick": "0.25.2",
+    "react-transition-group": "4.3.0",
+    "react-twitter-embed": "2.0.8",
+    "react-youtube": "7.9.0",
+    "sanitize-html-react": "^1.13.0",
+    "slick-carousel": "1.8.1",
+    "smooth-scroll": "16.1.0",
+    "styled-components": "4.3.2"
   },
-  "devDependencies": {
-    "prettier": "^1.19.1"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -33,11 +55,7 @@
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
+  "browerslist": [
+    "last 2 versions"
+  ]
 }

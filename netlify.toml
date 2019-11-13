@@ -1,0 +1,6 @@
+[build]
+  publish = "public"
+  command = "npm run build"
+[build.environment]
+  NPM_VERSION = "5.6.0"
+  NODE_VERSION = "9.9.0"

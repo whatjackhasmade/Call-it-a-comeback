@@ -1,34 +1,103 @@
+const config = require(`./site-config`)
+
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || `development`
+
+console.log(`Using environment config: "${activeEnv}"`)
+
+require(`dotenv`).config({
+  path: `.env.${activeEnv}`,
+})
+
 module.exports = {
-  siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-  },
   plugins: [
+    // Simple config, passing URL
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        // Arbitrary name for the remote schema Query type
+        typeName: "WORDPRESS",
+        // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
+        fieldName: "wordpress",
+        // Url to query from
+        url: "http://wjhm.test/graphql",
+        // refetch interval in seconds
+        refetchInterval: 60,
+      },
+    },
+    `gatsby-plugin-favicon`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-layout`,
+    `gatsby-plugin-lodash`,
+    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-hotjar`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        id: `1261093`,
+        sv: `6`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: `gatsby-plugin-google-analytics`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        trackingId: config.googleAnalyticsID,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-react-svg`,
+      options: {
+        rule: {
+          include: /assets/,
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-html-attributes`,
+      options: {
+        lang: `en`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        mergeLinkHeaders: false,
+        mergeCachingHeaders: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: `https://www.whatjackhasmade.co.uk`,
+        sitemap: `https://www.whatjackhasmade.co.uk/sitemap.xml`,
+        resolveEnv: () => activeEnv,
+        env: {
+          development: {
+            policy: [{ userAgent: `*`, disallow: [`/`] }],
+          },
+          production: {
+            policy: [
+              {
+                userAgent: `*`,
+                allow: `/`,
+                disallow: [`/inspiration`, `/assets`, `/client/*`, `/twitter`],
+              },
+            ],
+          },
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-polyfill-io`,
+      options: {
+        features: [
+          `Array.prototype.map`,
+          `fetch`,
+          `IntersectionObserver`,
+          `IntersectionObserverEntry`,
+        ],
+      },
+    },
   ],
 }
