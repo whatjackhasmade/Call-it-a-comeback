@@ -23,10 +23,8 @@ function Hero({
     )
   }
 
-  const background = background_colour ? background_colour : `#0652DD`
-
   return (
-    <HeroComponent background={background} overlay={overlay}>
+    <HeroComponent background={background_colour} overlay={overlay}>
       <div className="hero__wrapper">
         {content ? (
           <div className="hero__contents">{ParseHTML(content)}</div>
@@ -36,6 +34,7 @@ function Hero({
         {media && (
           <HeroMedia
             alt={media.altText}
+            background={background_colour}
             duotone={duotone}
             media={media.mediaItemUrl}
             overlay={overlay}
@@ -46,10 +45,10 @@ function Hero({
   )
 }
 
-function HeroMedia({ alt, duotone, media, overlay }) {
+function HeroMedia({ alt, background, duotone, media, overlay }) {
   if (duotone) {
     return (
-      <HeroMediaComponent overlay={overlay}>
+      <HeroMediaComponent background={background} overlay={overlay}>
         <Duotone
           className="hero__media"
           highlight={props => props.theme.primary}
@@ -62,7 +61,7 @@ function HeroMedia({ alt, duotone, media, overlay }) {
   }
 
   return (
-    <HeroMediaComponent overlay={overlay}>
+    <HeroMediaComponent background={background} overlay={overlay}>
       <img src={media} alt={alt} />
     </HeroMediaComponent>
   )

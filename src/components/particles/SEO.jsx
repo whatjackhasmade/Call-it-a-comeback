@@ -1,9 +1,8 @@
 import React from "react"
 import Helmet from "react-helmet"
 
-const SEO = props => {
+const SEO = ({ data }) => {
   const {
-    artist_info,
     isBlog,
     metaDesc,
     opengraphImage,
@@ -13,7 +12,7 @@ const SEO = props => {
     twitterDescription,
     twitterImage,
     twitterTitle,
-  } = props
+  } = data.seo
 
   const postURL = `/`
 
@@ -23,7 +22,7 @@ const SEO = props => {
       "@type": "WebSite",
       url: process.env.GATSBY_DOMAIN,
       name: opengraphTitle ? opengraphTitle : title,
-      alternateName: "Squawk Voices",
+      alternateName: "WhatJackHasMade",
     },
     {
       "@context": "http://schema.org",
@@ -35,11 +34,7 @@ const SEO = props => {
           item: {
             "@id": postURL,
             name: opengraphTitle ? opengraphTitle : title,
-            image: opengraphImage
-              ? opengraphImage
-              : artist_info
-              ? artist_info.avatar.sourceUrl
-              : null,
+            image: opengraphImage ? opengraphImage : null,
           },
         },
       ],
@@ -49,15 +44,11 @@ const SEO = props => {
       "@type": "BlogPosting",
       url: process.env.GATSBY_DOMAIN,
       name: opengraphTitle ? opengraphTitle : title,
-      alternateName: "Squawk Voices",
+      alternateName: "WhatJackHasMade",
       headline: opengraphTitle ? opengraphTitle : title,
       image: {
         "@type": "ImageObject",
-        url: opengraphImage
-          ? opengraphImage
-          : artist_info
-          ? artist_info.avatar.sourceUrl
-          : null,
+        url: opengraphImage ? opengraphImage : null,
       },
       description: metaDesc,
     },
@@ -68,16 +59,7 @@ const SEO = props => {
       {/* General tags */}
       <title>{opengraphTitle ? opengraphTitle : title}</title>
       <meta name="description" content={metaDesc} />
-      <meta
-        name="image"
-        content={
-          opengraphImage
-            ? opengraphImage
-            : artist_info
-            ? artist_info.avatar.sourceUrl
-            : null
-        }
-      />
+      <meta name="image" content={opengraphImage ? opengraphImage : null} />
 
       {/* Schema.org tags */}
       <script type="application/ld+json">
@@ -97,13 +79,7 @@ const SEO = props => {
       <meta property="og:description" content={metaDesc ? metaDesc : ""} />
       <meta
         property="og:image"
-        content={
-          opengraphImage
-            ? opengraphImage
-            : artist_info
-            ? artist_info.avatar.sourceUrl
-            : null
-        }
+        content={opengraphImage ? opengraphImage : null}
       />
 
       {/* Twitter Card tags */}
@@ -112,7 +88,7 @@ const SEO = props => {
         property="twitter:url"
         content={`${process.env.GATSBY_DOMAIN}/${slug}`}
       />
-      <meta name="twitter:creator" content={"squawkvoices"} />
+      <meta name="twitter:creator" content={"whatjackhasmade"} />
       <meta
         name="twitter:title"
         content={
@@ -128,13 +104,7 @@ const SEO = props => {
       <meta
         name="twitter:image"
         content={
-          twitterImage
-            ? twitterImage
-            : opengraphImage
-            ? opengraphImage
-            : artist_info
-            ? artist_info.avatar.sourceUrl
-            : null
+          twitterImage ? twitterImage : opengraphImage ? opengraphImage : null
         }
       />
     </Helmet>

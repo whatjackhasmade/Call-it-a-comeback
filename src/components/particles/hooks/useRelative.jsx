@@ -18,7 +18,8 @@ const WPURLData = () => {
 export const useRelative = url => {
   if (!url) return undefined
 
-  const WPURL = WPURLData()
+  let WPURL = WPURLData()
+  WPURL = WPURL.slice(0, -3)
   let string = url
 
   if (url.startsWith(`/`)) return url

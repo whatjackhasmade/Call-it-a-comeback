@@ -144,6 +144,7 @@ const query = `
 						${youtubeBlock}
 						${youtubechannelBlock}
 					}
+					${seoFields}
 					title
 					uri
 				}
@@ -180,8 +181,10 @@ exports.createPages = async ({ actions, graphql }) => {
   if (!data.wordpress) return null
 
   data.wordpress.pages.nodes.forEach(page => {
+    const uri = page.uri === "homepage" ? `/` : `/${page.uri}`
+
     actions.createPage({
-      path: `/${page.uri}`,
+      path: uri,
       component: path.resolve(`./src/components/templates/Page.jsx`),
       context: {
         ...page,
