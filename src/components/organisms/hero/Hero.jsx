@@ -1,69 +1,71 @@
-import React from "react";
+import React from "react"
+import ParseHTML from "../../particles/ParseHTML"
 
-import Duotone from "./Duotone";
-import HeroComponent from "./HeroStyles";
-import HeroMediaComponent from "./HeroMediaStyles";
+import Duotone from "./Duotone"
+import HeroComponent from "./HeroStyles"
+import HeroMediaComponent from "./HeroMediaStyles"
 
-function Hero({ data, children }) {
-	if (!data) {
-		return (
-			<HeroComponent>
-				<div className="hero__wrapper">
-					<div className="hero__contents">{children}</div>
-				</div>
-			</HeroComponent>
-		);
-	}
+function Hero({
+  background_colour,
+  children,
+  content,
+  duotone,
+  media,
+  overlay,
+}) {
+  if (!content) {
+    return (
+      <HeroComponent>
+        <div className="hero__wrapper">
+          <div className="hero__contents">{children}</div>
+        </div>
+      </HeroComponent>
+    )
+  }
 
-	const { background_colour, content, duotone, media, overlay } = data;
+  const background = background_colour ? background_colour : `#0652DD`
 
-	const background = background_colour ? background_colour : `#0652DD`;
-
-	const overlayBoolean = overlay === "1";
-
-	return (
-		<HeroComponent background={background} overlay={overlayBoolean}>
-			<div className="hero__wrapper">
-				{content ? (
-					<div
-						className="hero__contents"
-						dangerouslySetInnerHTML={{ __html: content }}
-					/>
-				) : (
-					<div className="hero__contents">{children}</div>
-				)}
-				{media && (
-					<HeroMedia
-						duotone={duotone}
-						media={media.full}
-						overlay={overlayBoolean}
-					/>
-				)}
-			</div>
-		</HeroComponent>
-	);
+  return (
+    <HeroComponent background={background} overlay={overlay}>
+      <div className="hero__wrapper">
+        {content ? (
+          <div className="hero__contents">{ParseHTML(content)}</div>
+        ) : (
+          <div className="hero__contents">{children}</div>
+        )}
+        {media && (
+          <HeroMedia
+            alt={media.altText}
+            duotone={duotone}
+            media={media.mediaItemUrl}
+            overlay={overlay}
+          />
+        )}
+      </div>
+    </HeroComponent>
+  )
 }
 
-function HeroMedia({ duotone, media, overlay }) {
-	if (duotone) {
-		return (
-			<HeroMediaComponent overlay={overlay}>
-				<Duotone
-					className="hero__media"
-					highlight={props => props.theme.primary}
-					shadow={`#000`}
-				>
-					<img src={media} alt="" />
-				</Duotone>
-			</HeroMediaComponent>
-		);
-	}
+function HeroMedia({ alt, duotone, media, overlay }) {
+  if (duotone) {
+    return (
+      <HeroMediaComponent overlay={overlay}>
+        <Duotone
+          className="hero__media"
+          highlight={props => props.theme.primary}
+          shadow={`#000`}
+        >
+          <img src={media} alt={alt} />
+        </Duotone>
+      </HeroMediaComponent>
+    )
+  }
 
-	return (
-		<HeroMediaComponent overlay={overlay}>
-			<img src={media} alt="" />
-		</HeroMediaComponent>
-	);
+  return (
+    <HeroMediaComponent overlay={overlay}>
+      <img src={media} alt={alt} />
+    </HeroMediaComponent>
+  )
 }
 
-export default Hero;
+export default Hero

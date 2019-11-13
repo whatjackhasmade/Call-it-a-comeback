@@ -1,7 +1,13 @@
 const path = require(`path`)
 
 const mediaFields = `
-  altText
+	altText
+	mediaItemUrl
+	xs: sourceUrl(size: FEATURED_XS)
+	sm: sourceUrl(size: FEATURED_SM)
+	md: sourceUrl(size: FEATURED_MD)
+	lg: sourceUrl(size: FEATURED_LG)
+	xl: sourceUrl(size: FEATURED_XL)
   uri
 `
 
@@ -20,11 +26,124 @@ const seoFields = `
 	}
 `
 
+const dribbbleBlock = `
+  ... on WORDPRESS_AcfDribbbleBlock {
+    name
+    dribbbleFields: acf {
+			content
+			count
+    }
+  }
+`
+
+const githubBlock = `
+  ... on WORDPRESS_AcfGithubBlock {
+    name
+    githubFields: acf {
+			content
+    }
+  }
+`
+
+const heroBlock = `
+  ... on WORDPRESS_AcfHeroBlock {
+    name
+    heroFields: acf {
+			background_colour
+			content
+			duotone
+			overlay
+			media {
+				${mediaFields}
+			}
+    }
+  }
+`
+
+const introBlock = `
+  ... on WORDPRESS_AcfIntroBlock {
+    name
+    introFields: acf {
+			content
+			heading
+			subheading
+    }
+  }
+`
+
+const presentationsBlock = `
+  ... on WORDPRESS_AcfPresentationsBlock {
+    name
+    presentationsFields: acf {
+			content
+			count
+    }
+  }
+`
+
+const rowBlock = `
+   ... on WORDPRESS_AcfRowBlock {
+    name
+		rowFields: acf {
+			media {
+				${mediaFields}
+			}
+			content
+			link
+		}
+	}
+`
+
+const testimonialsBlock = `
+   ... on WORDPRESS_AcfTestimonialsBlock {
+    name
+		testimonialsFields: acf {
+		  testimonials {
+				author
+				role
+				testimonial
+				logo {
+					${mediaFields}
+				}
+				media {
+					${mediaFields}
+				}
+			}
+		}
+	}
+`
+
+const youtubeBlock = `
+   ... on WORDPRESS_AcfYoutubeBlock {
+    name
+		youtubeFields: acf {
+			media
+		}
+	}
+`
+
+const youtubechannelBlock = `
+   ... on WORDPRESS_AcfYoutubechannelBlock {
+    name
+	}
+`
+
 const query = `
 	query {
 		wordpress {
 			pages(first: 5000, where: { status: PUBLISH }) {
 				nodes {
+					blocks {
+						${dribbbleBlock}
+						${githubBlock}
+						${heroBlock}
+						${introBlock}
+						${presentationsBlock}
+						${rowBlock}
+						${testimonialsBlock}
+						${youtubeBlock}
+						${youtubechannelBlock}
+					}
 					title
 					uri
 				}
@@ -63,7 +182,7 @@ exports.createPages = async ({ actions, graphql }) => {
   data.wordpress.pages.nodes.forEach(page => {
     actions.createPage({
       path: `/${page.uri}`,
-      component: path.resolve(`./src/components/templates/post.jsx`),
+      component: path.resolve(`./src/components/templates/Page.jsx`),
       context: {
         ...page,
         title: page.title,
@@ -73,8 +192,8 @@ exports.createPages = async ({ actions, graphql }) => {
 
   data.wordpress.posts.nodes.forEach(post => {
     actions.createPage({
-      path: `/post/${post.uri}`,
-      component: path.resolve(`./src/components/templates/post.jsx`),
+      path: `/${post.uri}`,
+      component: path.resolve(`./src/components/templates/post/Post.jsx`),
       context: {
         ...post,
         id: post.id,

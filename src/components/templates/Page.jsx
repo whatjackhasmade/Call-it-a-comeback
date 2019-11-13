@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 
-import Base from "./Base";
+import Base from "./Base"
 
-import ACFParser from "../particles/ACFParser";
+import ComponentParser from "../particles/ComponentParser"
 
 const PageTemplate = ({ pageContext }) => (
-	<Base context={pageContext}>
-		<ACFParser content={pageContext.content} />
-	</Base>
-);
+  <Base context={pageContext}>
+    <ComponentParser content={pageContext.blocks} />
+  </Base>
+)
 
-export default PageTemplate;
+export default PageTemplate

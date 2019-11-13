@@ -25,6 +25,7 @@ module.exports = {
         refetchInterval: 60,
       },
     },
+    `gatsby-source-bonus`,
     `gatsby-plugin-favicon`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-layout`,

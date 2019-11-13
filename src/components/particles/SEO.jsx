@@ -1,183 +1,144 @@
-import React, { Component } from "react";
-import Helmet from "react-helmet";
-import urljoin from "url-join";
-import config from "../../../data/SiteConfig";
+import React from "react"
+import Helmet from "react-helmet"
 
-export default class SEO extends Component {
-	render() {
-		const { postNode, postPath, postSEO, data } = this.props;
-		const blogURL = urljoin(config.siteUrl);
-		const postURL = postPath
-			? urljoin(config.siteUrl, postPath)
-			: config.siteUrl;
+const SEO = props => {
+  const {
+    artist_info,
+    isBlog,
+    metaDesc,
+    opengraphImage,
+    opengraphTitle,
+    slug,
+    title,
+    twitterDescription,
+    twitterImage,
+    twitterTitle,
+  } = props
 
-		if (typeof data !== "undefined") {
-			const { description, image, title } = data.yoast;
+  const postURL = `/`
 
-			const schemaOrgJSONLD = [
-				{
-					"@context": "http://schema.org",
-					"@type": "WebSite",
-					url: blogURL,
-					name: title,
-					alternateName: config.siteTitleAlt ? config.siteTitleAlt : ""
-				}
-			];
-			if (postSEO) {
-				schemaOrgJSONLD.push(
-					{
-						"@context": "http://schema.org",
-						"@type": "BreadcrumbList",
-						itemListElement: [
-							{
-								"@type": "ListItem",
-								position: 1,
-								item: {
-									"@id": postURL,
-									name: title,
-									image
-								}
-							}
-						]
-					},
-					{
-						"@context": "http://schema.org",
-						"@type": "BlogPosting",
-						url: blogURL,
-						name: title,
-						alternateName: config.siteTitleAlt ? config.siteTitleAlt : "",
-						headline: title,
-						image: {
-							"@type": "ImageObject",
-							url: image
-						},
-						description
-					}
-				);
-			}
+  const schemaOrgJSONLD = [
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      url: process.env.GATSBY_DOMAIN,
+      name: opengraphTitle ? opengraphTitle : title,
+      alternateName: "Squawk Voices",
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: {
+            "@id": postURL,
+            name: opengraphTitle ? opengraphTitle : title,
+            image: opengraphImage
+              ? opengraphImage
+              : artist_info
+              ? artist_info.avatar.sourceUrl
+              : null,
+          },
+        },
+      ],
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      url: process.env.GATSBY_DOMAIN,
+      name: opengraphTitle ? opengraphTitle : title,
+      alternateName: "Squawk Voices",
+      headline: opengraphTitle ? opengraphTitle : title,
+      image: {
+        "@type": "ImageObject",
+        url: opengraphImage
+          ? opengraphImage
+          : artist_info
+          ? artist_info.avatar.sourceUrl
+          : null,
+      },
+      description: metaDesc,
+    },
+  ]
 
-			return (
-				<Helmet>
-					{/* General tags */}
-					<title>{title}</title>
-					<meta name="description" content={description} />
-					<meta name="image" content={image} />
+  return (
+    <Helmet>
+      {/* General tags */}
+      <title>{opengraphTitle ? opengraphTitle : title}</title>
+      <meta name="description" content={metaDesc} />
+      <meta
+        name="image"
+        content={
+          opengraphImage
+            ? opengraphImage
+            : artist_info
+            ? artist_info.avatar.sourceUrl
+            : null
+        }
+      />
 
-					{/* Schema.org tags */}
-					<script type="application/ld+json">
-						{JSON.stringify(schemaOrgJSONLD)}
-					</script>
+      {/* Schema.org tags */}
+      <script type="application/ld+json">
+        {JSON.stringify(schemaOrgJSONLD)}
+      </script>
 
-					{/* OpenGraph tags */}
-					<meta property="og:url" content={postSEO ? postURL : blogURL} />
-					{postSEO ? <meta property="og:type" content="article" /> : null}
-					<meta property="og:title" content={title} />
-					<meta property="og:description" content={description} />
-					<meta property="og:image" content={image} />
+      {/* OpenGraph tags */}
+      <meta
+        property="og:url"
+        content={`${process.env.GATSBY_DOMAIN}/${slug}`}
+      />
+      {isBlog ? <meta property="og:type" content="article" /> : null}
+      <meta
+        property="og:title"
+        content={opengraphTitle ? opengraphTitle : title}
+      />
+      <meta property="og:description" content={metaDesc ? metaDesc : ""} />
+      <meta
+        property="og:image"
+        content={
+          opengraphImage
+            ? opengraphImage
+            : artist_info
+            ? artist_info.avatar.sourceUrl
+            : null
+        }
+      />
 
-					{/* Twitter Card tags */}
-					<meta name="twitter:card" content="summary_large_image" />
-					<meta property="twitter:url" content={postSEO ? postURL : blogURL} />
-					<meta
-						name="twitter:creator"
-						content={config.userTwitter ? config.userTwitter : ""}
-					/>
-					<meta name="twitter:title" content={title} />
-					<meta name="twitter:description" content={description} />
-					<meta name="twitter:image" content={image} />
-				</Helmet>
-			);
-		} else {
-			let title;
-			let description;
-			let image;
-			let postURL;
-			if (postSEO) {
-				const postMeta = postNode.frontmatter;
-				({ title } = postMeta);
-				description = postMeta.description
-					? postMeta.description
-					: postNode.excerpt;
-				image = postMeta.cover;
-				postURL = urljoin(config.siteUrl, postPath);
-			} else {
-				title = config.siteTitle;
-				description = config.siteDescription;
-				image = config.siteLogo;
-			}
-
-			image = urljoin(config.siteUrl, image);
-			const blogURL = urljoin(config.siteUrl);
-			const schemaOrgJSONLD = [
-				{
-					"@context": "http://schema.org",
-					"@type": "WebSite",
-					url: blogURL,
-					name: title,
-					alternateName: config.siteTitleAlt ? config.siteTitleAlt : ""
-				}
-			];
-			if (postSEO) {
-				schemaOrgJSONLD.push(
-					{
-						"@context": "http://schema.org",
-						"@type": "BreadcrumbList",
-						itemListElement: [
-							{
-								"@type": "ListItem",
-								position: 1,
-								item: {
-									"@id": postURL,
-									name: title,
-									image
-								}
-							}
-						]
-					},
-					{
-						"@context": "http://schema.org",
-						"@type": "BlogPosting",
-						url: blogURL,
-						name: title,
-						alternateName: config.siteTitleAlt ? config.siteTitleAlt : "",
-						headline: title,
-						image: {
-							"@type": "ImageObject",
-							url: image
-						},
-						description
-					}
-				);
-			}
-			return (
-				<Helmet>
-					{/* General tags */}
-					<meta name="description" content={description} />
-					<meta name="image" content={image} />
-
-					{/* Schema.org tags */}
-					<script type="application/ld+json">
-						{JSON.stringify(schemaOrgJSONLD)}
-					</script>
-
-					{/* OpenGraph tags */}
-					<meta property="og:url" content={postSEO ? postURL : blogURL} />
-					{postSEO ? <meta property="og:type" content="article" /> : null}
-					<meta property="og:title" content={title} />
-					<meta property="og:description" content={description} />
-					<meta property="og:image" content={image} />
-
-					{/* Twitter Card tags */}
-					<meta name="twitter:card" content="summary_large_image" />
-					<meta
-						name="twitter:creator"
-						content={config.userTwitter ? config.userTwitter : ""}
-					/>
-					<meta name="twitter:title" content={title} />
-					<meta name="twitter:description" content={description} />
-					<meta name="twitter:image" content={image} />
-				</Helmet>
-			);
-		}
-	}
+      {/* Twitter Card tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        property="twitter:url"
+        content={`${process.env.GATSBY_DOMAIN}/${slug}`}
+      />
+      <meta name="twitter:creator" content={"squawkvoices"} />
+      <meta
+        name="twitter:title"
+        content={
+          twitterTitle ? twitterTitle : opengraphTitle ? opengraphTitle : title
+        }
+      />
+      <meta
+        name="twitter:description"
+        content={
+          twitterDescription ? twitterDescription : metaDesc ? metaDesc : ""
+        }
+      />
+      <meta
+        name="twitter:image"
+        content={
+          twitterImage
+            ? twitterImage
+            : opengraphImage
+            ? opengraphImage
+            : artist_info
+            ? artist_info.avatar.sourceUrl
+            : null
+        }
+      />
+    </Helmet>
+  )
 }
+
+export default SEO
