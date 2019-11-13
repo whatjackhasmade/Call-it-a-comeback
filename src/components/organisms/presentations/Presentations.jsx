@@ -1,14 +1,46 @@
 import React from "react"
-// import { StaticQuery, graphql } from "gatsby"
+import { StaticQuery, graphql } from "gatsby"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import ParseHTML from "../../particles/ParseHTML"
 
 import PresentationsComponent from "./PresentationsStyles"
 
 import Intro from "../intro/Intro"
 
-export default props => (true ? null : Presentations)
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query {
+        wordpress {
+          events {
+            nodes {
+              id
+              acf: PostTypeEventFields {
+                date
+                url
+                venue
+              }
+              featuredImage {
+                altText
+                mediaItemUrl
+                xs: sourceUrl(size: FEATURED_XS)
+                sm: sourceUrl(size: FEATURED_SM)
+                md: sourceUrl(size: FEATURED_MD)
+                lg: sourceUrl(size: FEATURED_LG)
+                xl: sourceUrl(size: FEATURED_XL)
+                uri
+              }
+              title
+            }
+          }
+        }
+      }
+    `}
+    render={query => <Presentations query={query} {...props} />}
+  />
+)
 
 const settings = {
   autoplay: true,
@@ -52,7 +84,7 @@ const settings = {
   ],
 }
 
-function Presentations({ data, query }) {
+function Presentations({ content, query }) {
   return (
     <PresentationsComponent>
       <Intro
@@ -60,16 +92,16 @@ function Presentations({ data, query }) {
         subheading={`Touring the south coast`}
         marginReduced
       >
-        <div dangerouslySetInnerHTML={{ __html: data.content }} />
+        <div>{ParseHTML(content)}</div>
       </Intro>
       <Slider {...settings}>
-        {query.allEvent.edges !== [] &&
-          query.allEvent.edges.map((event, index) => (
+        {query.wordpress.events.nodes.length > 0 &&
+          query.wordpress.events.nodes.map((event, index) => (
             <Event
               index={index}
               key={`event-${index}`}
               event={event}
-              venue={event.node.venue}
+              venue={event.venue}
             />
           ))}
       </Slider>
@@ -83,16 +115,16 @@ function Event({ index, event, venue }) {
       className="presentations__event"
       data-index={index}
       index={index}
-      key={`${event.node.title}-${index}`}
+      key={`${event.title}-${index}`}
     >
       <img
-        alt={event.node.title}
+        alt={event.title}
         className="presentations__event__thumbnail"
-        src={event.node.imageSM}
+        src={event.featuredImage.sm}
       />
       <div className="presentations__event__meta">
         <h5 className="subheading">{venue}</h5>
-        <h3>{event.node.title}</h3>
+        <h3>{event.title}</h3>
       </div>
     </div>
   )

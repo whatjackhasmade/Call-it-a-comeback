@@ -1,5 +1,5 @@
 import React from "react"
-// import { StaticQuery, graphql } from "gatsby"
+import { StaticQuery, graphql } from "gatsby"
 import YouTube from "react-youtube"
 
 import backgroundLeft from "./youtube-left.png"
@@ -15,7 +15,34 @@ const opts = {
   },
 }
 
-export default props => (true ? null : YouTubeChannel)
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query {
+        allYoutube {
+          edges {
+            node {
+              id
+              snippet {
+                description
+                resourceId {
+                  videoId
+                }
+                title
+                thumbnails {
+                  medium {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={query => <YouTubeChannel query={query} {...props} />}
+  />
+)
 
 function YouTubeChannel({ data, query }) {
   const _onReady = event => {

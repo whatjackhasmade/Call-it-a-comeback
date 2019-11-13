@@ -11,7 +11,7 @@ exports.sourceNodes = async (
   { actions: { createNode }, createNodeId },
   { plugins, ...options }
 ) => {
-  const accessToken = `9422ed733294915d402ad516d509f33f618c1ddde539c9fddd94415530e127e3`
+  const accessToken = process.env.GATSBY_DRIBBBLE_TOKEN
   const dribbbleURL = `https://api.dribbble.com/v2/user/shots?access_token=${accessToken}`
   const dribbbleResponse = await fetch(dribbbleURL)
   const dribbbleData = await dribbbleResponse.json()
@@ -33,7 +33,7 @@ exports.sourceNodes = async (
     })
   })
 
-  const GAPI = process.env.GOOGLE_API
+  const GAPI = process.env.GATSBY_GOOGLE_API
   const PlayListID = `UUIOm-HME4V_STS9yWM5aXIg`
   const NumberResults = 12
   const youtubeURL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${PlayListID}&key=${GAPI}&maxResults=${NumberResults}`
