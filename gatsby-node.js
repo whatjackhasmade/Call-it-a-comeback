@@ -167,6 +167,75 @@ const query = `
 					status
 					uri
 					title
+					PostFields {
+						relatedPosts {
+							... on WORDPRESS_Post {
+								id
+								date
+								featuredImage {
+									${mediaFields}
+								}
+								${seoFields}
+								status
+								uri
+								title
+							}
+						}
+					}
+				}
+			}
+			caseStudies {
+				nodes {
+					id
+					date
+					featuredImage {
+						${mediaFields}
+					}
+					${seoFields}
+					status
+					uri
+					title
+					CaseStudyFields {
+						devicePreviews
+						devices {
+							desktop
+							fieldGroupName
+							mobile
+						}
+						gallery {
+							${mediaFields}
+						}
+						intro {
+							description
+							illustration {
+								${mediaFields}
+							}
+							title
+							subtitle
+						}
+						siteUrl
+						testimonials {
+							testimonial {
+								author
+								fieldGroupName
+								logo {
+									${mediaFields}
+								}
+								media {
+									${mediaFields}
+								}
+								role
+								testimonial
+							}
+						}
+						blocks {
+							fields {
+								columnOne
+								columnTwo
+								title
+							}
+						}
+					}
 				}
 			}
 		}
@@ -202,6 +271,19 @@ exports.createPages = async ({ actions, graphql }) => {
         id: post.id,
         slug: post.uri,
         title: post.title,
+      },
+    })
+  })
+
+  data.wordpress.caseStudies.nodes.forEach(caseStudy => {
+    actions.createPage({
+      path: `/${caseStudy.uri}`,
+      component: path.resolve(`./src/components/templates/case/Case.jsx`),
+      context: {
+        ...caseStudy,
+        id: caseStudy.id,
+        slug: caseStudy.uri,
+        title: caseStudy.title,
       },
     })
   })

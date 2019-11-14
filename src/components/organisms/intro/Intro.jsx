@@ -1,9 +1,11 @@
 import React from "react"
+import ParseHTML from "../../particles/ParseHTML"
 
 import IntroComponent from "./IntroStyles"
 
 const Intro = props => {
   const {
+    children,
     content,
     heading,
     illustration,
@@ -26,15 +28,14 @@ const Intro = props => {
         <div className="intro__wrapper">
           <Subheading className="h4 intro__subheading">{subheading}</Subheading>
           <Heading className="h1 intro__heading">{heading}</Heading>
-          <div
-            className="intro__contents"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          {content && (
+            <div className="intro__contents">{ParseHTML(content)}</div>
+          )}
         </div>
         {illustration && (
           <img
             className="intro__illustration"
-            src={illustration}
+            src={illustration.mediaItemUrl}
             alt={heading}
           />
         )}
@@ -50,7 +51,7 @@ const Intro = props => {
         <div className="intro__wrapper">
           <Subheading className="h4 intro__subheading">{subheading}</Subheading>
           <Heading className="h1 intro__heading">{heading}</Heading>
-          <div className="intro__contents">{props.children}</div>
+          <div className="intro__contents">{children}</div>
         </div>
       </IntroComponent>
     )

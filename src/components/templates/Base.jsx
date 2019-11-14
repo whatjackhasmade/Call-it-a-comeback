@@ -356,6 +356,20 @@ const GlobalStyle = createGlobalStyle`
 			top: auto;
 		}
 	}
+
+	.wp-block-embed__wrapper {
+		height: 0;
+		padding-top: 56.25%;
+		position: relative;
+
+		iframe {
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+	}
 `
 
 export default class Base extends React.Component {
