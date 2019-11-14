@@ -58,7 +58,7 @@ function Related({ data }) {
                         }
                         className="related__media"
                       />
-                      {item.title && <h3>{item.title}</h3>}
+                      {item.title && <h3>{decodeHTML(item.title)}</h3>}
                       {item.seo.metaDesc && <p>{item.seo.metaDesc}</p>}
                     </Link>
                   </RelatedItem>
