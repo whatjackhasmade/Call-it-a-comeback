@@ -41,7 +41,7 @@ function CaseTemplate({ pageContext }) {
     gallery,
     intro,
     related = [],
-    siteURL,
+    siteUrl,
     testimonials,
   } = CaseStudyFields
 
@@ -92,56 +92,62 @@ function CaseTemplate({ pageContext }) {
           illustration={intro.illustration}
           maxWidth={`906px`}
         />
-        <Media>
-          {({ breakpoints, currentBreakpoint }) =>
-            breakpoints[currentBreakpoint] > breakpoints.lg ? (
-              <InView threshold={0} triggerOnce={true}>
-                {({ inView, ref }) => (
-                  <Devices
-                    className={inView ? `devices devices--show` : `devices`}
-                    ref={ref}
-                  >
-                    <a href={siteURL} rel="noopener noreferrer" target="_blank">
-                      <div className="device-wrapper macbook">
-                        <div
-                          className="device"
-                          data-color="white"
-                          data-device="Macbook2015"
-                          data-orientation="portrait"
-                        >
-                          <div className="screen">
-                            <YouTubeEmbed url={devices.desktop} />
+        {devicePreviews && (
+          <Media>
+            {({ breakpoints, currentBreakpoint }) =>
+              breakpoints[currentBreakpoint] > breakpoints.lg ? (
+                <InView threshold={0} triggerOnce={true}>
+                  {({ inView, ref }) => (
+                    <Devices
+                      className={inView ? `devices devices--show` : `devices`}
+                      ref={ref}
+                    >
+                      <a
+                        href={siteUrl}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <div className="device-wrapper macbook">
+                          <div
+                            className="device"
+                            data-color="white"
+                            data-device="Macbook2015"
+                            data-orientation="portrait"
+                          >
+                            <div className="screen">
+                              <YouTubeEmbed url={devices.desktop} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="device-wrapper iphone">
-                        <div
-                          className="device"
-                          data-device="iPhone7"
-                          data-orientation="portrait"
-                          data-color="white"
-                        >
-                          <div className="screen">
-                            <YouTubeEmbed url={devices.mobile} />
+                        <div className="device-wrapper iphone">
+                          <div
+                            className="device"
+                            data-device="iPhone7"
+                            data-orientation="portrait"
+                            data-color="white"
+                          >
+                            <div className="screen">
+                              <YouTubeEmbed url={devices.mobile} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </a>
-                  </Devices>
-                )}
-              </InView>
-            ) : (
-              <a
-                href={siteURL}
-                className="button"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                View The {intro.subtitle} Website
-              </a>
-            )
-          }
-        </Media>
+                      </a>
+                    </Devices>
+                  )}
+                </InView>
+              ) : (
+                <a
+                  href={siteUrl}
+                  className="button"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  View The {intro.subtitle} Website
+                </a>
+              )
+            }
+          </Media>
+        )}
 
         {blocks[0] && <Block data={blocks[0].fields} />}
         {gallery_one[0] && <Gallery images={gallery_one} />}
@@ -220,19 +226,19 @@ function Related({ data }) {
       <h2>Continue Viewing My Case Studies</h2>
       <div className="related__items">
         {data.map(item => (
-          <InView key={item.post_name} threshold={0} triggerOnce={true}>
+          <InView key={item.id} threshold={0} triggerOnce={true}>
             {({ inView, ref }) => (
               <RelatedItem ref={ref}>
-                <Link to={`/${item.slug}`}>
+                <Link to={`/${item.uri}`}>
                   <ImageLoader
-                    src={item.imageMD}
+                    src={item.featuredImage.md}
                     alt={item.title}
                     className={`related__media`}
                     loadedClassName={`related__media`}
                     loadingClassName={`related__media`}
                   />
-                  <h3>{item.yoast.title}</h3>
-                  <p>{item.yoast.description}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.seo.metaDesc}</p>
                 </Link>
               </RelatedItem>
             )}

@@ -213,6 +213,19 @@ const query = `
 							title
 							subtitle
 						}
+						related {
+							...on WORDPRESS_CaseStudy {
+								id
+								date
+								featuredImage {
+									${mediaFields}
+								}
+								${seoFields}
+								status
+								uri
+								title
+							}
+						}
 						siteUrl
 						testimonials {
 							testimonial {
