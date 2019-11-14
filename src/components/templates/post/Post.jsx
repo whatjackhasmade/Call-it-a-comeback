@@ -42,27 +42,30 @@ function Related({ data }) {
         </span>
       </h2>
       <div className="related__items">
-        {data.map(item => (
-          <InView key={item.uri} threshold={0} triggerOnce={true}>
-            {({ inView, ref }) => (
-              <RelatedItem ref={ref}>
-                <Link to={`/${item.uri}`}>
-                  <ImageLoader
-                    src={item.featuredImage.md}
-                    alt={
-                      item.featuredImage.altText
-                        ? item.featuredImage.altText
-                        : item.title
-                    }
-                    className="related__media"
-                  />
-                  {item.title && <h3>{item.title}</h3>}
-                  {item.seo.metaDesc && <p>{item.seo.metaDesc}</p>}
-                </Link>
-              </RelatedItem>
-            )}
-          </InView>
-        ))}
+        {data.map(
+          item =>
+            item.featuredImage && (
+              <InView key={item.uri} threshold={0} triggerOnce={true}>
+                {({ inView, ref }) => (
+                  <RelatedItem ref={ref}>
+                    <Link to={`/${item.uri}`}>
+                      <ImageLoader
+                        src={item.featuredImage.md}
+                        alt={
+                          item.featuredImage.altText
+                            ? item.featuredImage.altText
+                            : item.title
+                        }
+                        className="related__media"
+                      />
+                      {item.title && <h3>{item.title}</h3>}
+                      {item.seo.metaDesc && <p>{item.seo.metaDesc}</p>}
+                    </Link>
+                  </RelatedItem>
+                )}
+              </InView>
+            )
+        )}
       </div>
     </RelatedContainer>
   )
