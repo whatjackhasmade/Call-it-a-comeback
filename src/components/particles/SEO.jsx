@@ -1,5 +1,6 @@
 import React from "react"
 import Helmet from "react-helmet"
+import { decodeHTML } from "../helpers"
 
 const SEO = ({ data }) => {
   if (!data || !data.seo) return null
@@ -23,7 +24,7 @@ const SEO = ({ data }) => {
       "@context": "http://schema.org",
       "@type": "WebSite",
       url: process.env.GATSBY_DOMAIN,
-      name: opengraphTitle ? opengraphTitle : title,
+      name: opengraphTitle ? decodeHTML(opengraphTitle) : decodeHTML(title),
       alternateName: "WhatJackHasMade",
     },
     {
@@ -35,7 +36,9 @@ const SEO = ({ data }) => {
           position: 1,
           item: {
             "@id": postURL,
-            name: opengraphTitle ? opengraphTitle : title,
+            name: opengraphTitle
+              ? decodeHTML(opengraphTitle)
+              : decodeHTML(title),
             image: opengraphImage ? opengraphImage : null,
           },
         },
@@ -45,9 +48,9 @@ const SEO = ({ data }) => {
       "@context": "http://schema.org",
       "@type": "BlogPosting",
       url: process.env.GATSBY_DOMAIN,
-      name: opengraphTitle ? opengraphTitle : title,
+      name: opengraphTitle ? decodeHTML(opengraphTitle) : decodeHTML(title),
       alternateName: "WhatJackHasMade",
-      headline: opengraphTitle ? opengraphTitle : title,
+      headline: opengraphTitle ? decodeHTML(opengraphTitle) : decodeHTML(title),
       image: {
         "@type": "ImageObject",
         url: opengraphImage ? opengraphImage : null,
@@ -59,7 +62,9 @@ const SEO = ({ data }) => {
   return (
     <Helmet>
       {/* General tags */}
-      <title>{opengraphTitle ? opengraphTitle : title}</title>
+      <title>
+        {opengraphTitle ? decodeHTML(opengraphTitle) : decodeHTML(title)}
+      </title>
       <meta name="description" content={metaDesc} />
       <meta name="image" content={opengraphImage ? opengraphImage : null} />
 
@@ -76,7 +81,9 @@ const SEO = ({ data }) => {
       {isBlog ? <meta property="og:type" content="article" /> : null}
       <meta
         property="og:title"
-        content={opengraphTitle ? opengraphTitle : title}
+        content={
+          opengraphTitle ? decodeHTML(opengraphTitle) : decodeHTML(title)
+        }
       />
       <meta property="og:description" content={metaDesc ? metaDesc : ""} />
       <meta
@@ -94,7 +101,11 @@ const SEO = ({ data }) => {
       <meta
         name="twitter:title"
         content={
-          twitterTitle ? twitterTitle : opengraphTitle ? opengraphTitle : title
+          twitterTitle
+            ? twitterTitle
+            : opengraphTitle
+            ? decodeHTML(opengraphTitle)
+            : decodeHTML(title)
         }
       />
       <meta
