@@ -25,7 +25,7 @@ module.exports = {
         // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
         fieldName: "wordpress",
         // Url to query from
-        url: "http://wjhm.test/graphql",
+        url: "https://wjhm.noface.app/graphql",
         // refetch interval in seconds
         refetchInterval: 15,
       },
