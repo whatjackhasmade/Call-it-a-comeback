@@ -144,6 +144,7 @@ const query = `
 						${youtubeBlock}
 						${youtubechannelBlock}
 					}
+					isFrontPage
 					${seoFields}
 					title
 					uri
@@ -263,7 +264,8 @@ exports.createPages = async ({ actions, graphql }) => {
   if (!data.wordpress) return null
 
   data.wordpress.pages.nodes.forEach(page => {
-    const uri = page.uri === "homepage" ? `/` : `/${page.uri}`
+    const { isFrontPage } = page
+    const uri = isFrontPage ? `/` : `/${page.uri}`
 
     actions.createPage({
       path: uri,
