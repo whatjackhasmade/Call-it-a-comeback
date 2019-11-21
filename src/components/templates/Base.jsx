@@ -15,9 +15,9 @@ import Footer from "../organisms/footer/Footer"
 import Header from "../organisms/header/Header"
 
 if (typeof window !== "undefined") {
-  // Make scroll behavior of internal links smooth
-  // eslint-disable-next-line global-require
-  require("smooth-scroll")('a[href*="#"]')
+	// Make scroll behavior of internal links smooth
+	// eslint-disable-next-line global-require
+	require("smooth-scroll")('a[href*="#"]')
 }
 
 const GlobalStyle = createGlobalStyle`
@@ -25,11 +25,11 @@ const GlobalStyle = createGlobalStyle`
 		font-family: 'SuisseIntl';
 		src: url(${Fonts.SuisseIntlRegularEOT}); /* IE9 Compat Modes */
 		src: url(${
-      Fonts.SuisseIntlRegularEOTIE
-    }) format('embedded-opentype'), /* IE6-IE8 */
+			Fonts.SuisseIntlRegularEOTIE
+		}) format('embedded-opentype'), /* IE6-IE8 */
 			url(${
-        Fonts.SuisseIntlRegularWOFF2
-      }) format('woff2'), /* Super Modern Browsers */
+				Fonts.SuisseIntlRegularWOFF2
+			}) format('woff2'), /* Super Modern Browsers */
 			url(${Fonts.SuisseIntlRegularWOFF}) format('woff'), /* Pretty Modern Browsers */
 			url(${Fonts.SuisseIntlRegularTTF})  format('truetype');
 		font-style: normal;
@@ -40,8 +40,8 @@ const GlobalStyle = createGlobalStyle`
 		font-family: 'SuisseIntl';
 		src: url(${Fonts.SuisseIntlItalicEOT}); /* IE9 Compat Modes */
 		src: url(${
-      Fonts.SuisseIntlItalicEOTIE
-    }) format('embedded-opentype'), /* IE6-IE8 */
+			Fonts.SuisseIntlItalicEOTIE
+		}) format('embedded-opentype'), /* IE6-IE8 */
 			url(${Fonts.SuisseIntlItalicWOFF2}) format('woff2'), /* Super Modern Browsers */
 			url(${Fonts.SuisseIntlItalicWOFF}) format('woff'), /* Pretty Modern Browsers */
 			url(${Fonts.SuisseIntlItalicTTF})  format('truetype');
@@ -53,8 +53,8 @@ const GlobalStyle = createGlobalStyle`
 		font-family: 'SuisseIntl';
 		src: url(${Fonts.SuisseIntlMediumEOT}); /* IE9 Compat Modes */
 		src: url(${
-      Fonts.SuisseIntlMediumEOTIE
-    }) format('embedded-opentype'), /* IE6-IE8 */
+			Fonts.SuisseIntlMediumEOTIE
+		}) format('embedded-opentype'), /* IE6-IE8 */
 			url(${Fonts.SuisseIntlMediumWOFF2}) format('woff2'), /* Super Modern Browsers */
 			url(${Fonts.SuisseIntlMediumWOFF}) format('woff'), /* Pretty Modern Browsers */
 			url(${Fonts.SuisseIntlMediumTTF})  format('truetype');
@@ -67,8 +67,8 @@ const GlobalStyle = createGlobalStyle`
 		font-family: 'SuisseIntl';
 		src: url(${Fonts.SuisseIntlBoldEOT}); /* IE9 Compat Modes */
 		src: url(${
-      Fonts.SuisseIntlBoldEOTIE
-    }) format('embedded-opentype'), /* IE6-IE8 */
+			Fonts.SuisseIntlBoldEOTIE
+		}) format('embedded-opentype'), /* IE6-IE8 */
 			url(${Fonts.SuisseIntlBoldWOFF2}) format('woff2'), /* Super Modern Browsers */
 			url(${Fonts.SuisseIntlBoldWOFF}) format('woff'), /* Pretty Modern Browsers */
 			url(${Fonts.SuisseIntlBoldTTF})  format('truetype');
@@ -80,8 +80,8 @@ const GlobalStyle = createGlobalStyle`
 		font-family: 'SuisseIntl';
 		src: url(${Fonts.SuisseIntlBlackEOT}); /* IE9 Compat Modes */
 		src: url(${
-      Fonts.SuisseIntlBlackEOTIE
-    }) format('embedded-opentype'), /* IE6-IE8 */
+			Fonts.SuisseIntlBlackEOTIE
+		}) format('embedded-opentype'), /* IE6-IE8 */
 			url(${Fonts.SuisseIntlBlackWOFF2}) format('woff2'), /* Super Modern Browsers */
 			url(${Fonts.SuisseIntlBlackWOFF}) format('woff'), /* Pretty Modern Browsers */
 			url(${Fonts.SuisseIntlBlackTTF})  format('truetype');
@@ -357,39 +357,41 @@ const GlobalStyle = createGlobalStyle`
 		}
 	}
 
-	.wp-block-embed__wrapper {
-		height: 0;
-		padding-top: 56.25%;
-		position: relative;
+	.wp-block-embed-youtube {
+		.wp-block-embed__wrapper {
+			height: 0;
+			padding-top: 56.25%;
+			position: relative;
 
-		iframe {
-			height: 100%;
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 100%;
+			iframe {
+				height: 100%;
+				left: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
+			}
 		}
 	}
 `
 
 export default class Base extends React.Component {
-  render() {
-    return (
-      <ThemeProvider theme={ThemeDefault}>
-        <React.Fragment>
-          <GlobalStyle />
-          <Helmet title={config.siteTitle} />
-          <SEO data={this.props.context} />
-          <div className="wrapper">
-            <Header />
-            <main>{this.props.children}</main>
-            {this.props.cta !== false && <Contact />}
-            <Footer />
-          </div>
-        </React.Fragment>
-      </ThemeProvider>
-    )
-  }
+	render() {
+		return (
+			<ThemeProvider theme={ThemeDefault}>
+				<React.Fragment>
+					<GlobalStyle />
+					<Helmet title={config.siteTitle} />
+					<SEO data={this.props.context} />
+					<div className="wrapper">
+						<Header />
+						<main>{this.props.children}</main>
+						{this.props.cta !== false && <Contact />}
+						<Footer />
+					</div>
+				</React.Fragment>
+			</ThemeProvider>
+		)
+	}
 }
 
 export { GlobalStyle }
