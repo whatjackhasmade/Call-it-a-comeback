@@ -19,8 +19,10 @@ const config = {
 				parent.attribs.class === "twitter-tweet"
 			) {
 				let url = href.split("/")
+				if (url.length < 6) return null
 				url = url[5]
 				url = url.split(`?`)
+				if (url.length < 1) return null
 				url = url[0]
 				if (url) return <TwitterTweetEmbed tweetId={url} />
 				return null
