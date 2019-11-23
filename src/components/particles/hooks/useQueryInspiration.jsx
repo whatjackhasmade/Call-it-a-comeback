@@ -5,7 +5,7 @@ export const useQueryInspiration = () => {
     graphql`
       query WordPressInspirationPage {
         wordpress {
-          inspirations {
+          inspirations(first: 500) {
             nodes {
               id
               acf: InspirationFields {
@@ -20,6 +20,11 @@ export const useQueryInspiration = () => {
                   uri
                 }
                 source
+              }
+              tags {
+                nodes {
+                  slug
+                }
               }
               title
             }

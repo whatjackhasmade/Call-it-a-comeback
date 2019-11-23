@@ -33,7 +33,10 @@ function Header() {
         </Link>
         <nav className={menuOpen ? `header__menu--show` : null}>
           {headerData.menuItems.nodes.map(
-            (item, index) => index !== menuLength - 1 && <MenuItem {...item} />
+            (item, index) =>
+              index !== menuLength - 1 && (
+                <MenuItem key={`header-nav-${index}`} {...item} />
+              )
           )}
         </nav>
         <a className="mailtoui" href={lastItem.url}>

@@ -15,28 +15,29 @@ function Grid({ filter, items }) {
 
     if (typeof item === "undefined") break
 
-    const media = item.media
-    const ext = media.substr(media.lastIndexOf(".") + 1)
+    const { id, media } = item
+    const { altText, md, mediaItemUrl } = media
+    const ext = mediaItemUrl.substr(mediaItemUrl.lastIndexOf(".") + 1)
 
     if (ext === `mp4`) {
       rows.push(
         <GridItem
-          key={`grid-item-${i}`}
-          category={item.category}
+          key={`grid-item-${id}`}
+          tag={item.tags.nodes[0].slug}
           filter={filter}
         >
-          <video src={item.media} alt="" autoPlay muted loop />
+          <video src={mediaItemUrl} alt={altText} autoPlay muted loop />
           <span className="grid__item__title">{item.title}</span>
         </GridItem>
       )
     } else {
       rows.push(
         <GridItem
-          key={`grid-item-${i}`}
-          category={item.category}
+          key={`grid-item-${id}`}
+          tag={item.tags.nodes[0].slug}
           filter={filter}
         >
-          <img src={item.media} alt="" />
+          <img src={md} alt={altText} />
           <span className="grid__item__title">{item.title}</span>
         </GridItem>
       )
@@ -53,7 +54,7 @@ function Grid({ filter, items }) {
   )
 }
 
-function GridItem({ category, children, filter }) {
+function GridItem({ tag, children, filter }) {
   const [fullScreen, changeFullScreen] = useState(false)
 
   const toggleFullscreen = e => {
@@ -63,9 +64,9 @@ function GridItem({ category, children, filter }) {
   let classList = `grid__item`
   if (fullScreen) classList += ` grid__item--fullscreen`
 
-  if (filter !== ``) {
-    if (category === filter) classList += ` grid__item--active`
-    if (category !== filter) classList += ` grid__item--inactive`
+  if (filter) {
+    if (tag === filter) classList += ` grid__item--active`
+    if (tag !== filter) classList += ` grid__item--inactive`
   }
 
   return (

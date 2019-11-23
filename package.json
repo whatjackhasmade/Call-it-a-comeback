@@ -23,6 +23,7 @@
     "gatsby-plugin-sitemap": "2.2.12",
     "gatsby-plugin-styled-components": "3.1.5",
     "gatsby-source-graphql": "^2.1.22",
+    "he": "^1.2.0",
     "html-react-parser": "0.9.1",
     "html5-device-mockups": "3.2.1",
     "intersection-observer": "0.7.0",

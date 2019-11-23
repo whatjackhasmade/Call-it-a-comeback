@@ -1,46 +1,13 @@
 import React from "react"
-import { StaticQuery, graphql } from "gatsby"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import ParseHTML from "../../particles/ParseHTML"
+import useQueryPresentations from "../../particles/hooks/useQueryPresentations"
 
 import PresentationsComponent from "./PresentationsStyles"
 
 import Intro from "../intro/Intro"
-
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        wordpress {
-          events {
-            nodes {
-              id
-              acf: PostTypeEventFields {
-                date
-                url
-                venue
-              }
-              featuredImage {
-                altText
-                mediaItemUrl
-                xs: sourceUrl(size: FEATURED_XS)
-                sm: sourceUrl(size: FEATURED_SM)
-                md: sourceUrl(size: FEATURED_MD)
-                lg: sourceUrl(size: FEATURED_LG)
-                xl: sourceUrl(size: FEATURED_XL)
-                uri
-              }
-              title
-            }
-          }
-        }
-      }
-    `}
-    render={query => <Presentations query={query} {...props} />}
-  />
-)
 
 const settings = {
   autoplay: true,
@@ -84,7 +51,9 @@ const settings = {
   ],
 }
 
-function Presentations({ content, query }) {
+function Presentations({ content }) {
+  const presentations = useQueryPresentations()
+
   return (
     <PresentationsComponent>
       <Intro
@@ -95,8 +64,8 @@ function Presentations({ content, query }) {
         <div>{ParseHTML(content)}</div>
       </Intro>
       <Slider {...settings}>
-        {query.wordpress.events.nodes.length > 0 &&
-          query.wordpress.events.nodes.map((event, index) => (
+        {presentations.length > 0 &&
+          presentations.map((event, index) => (
             <Event
               index={index}
               key={`event-${index}`}
@@ -129,3 +98,5 @@ function Event({ index, event, venue }) {
     </div>
   )
 }
+
+export default Presentations

@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import useQueryInspiration from "../components/particles/hooks/useQueryInspiration"
+import { randomID } from "../components/helpers"
+import he from "he"
 
 import Base from "../components/templates/Base"
 
@@ -30,19 +32,24 @@ const InspiratioNavigation = styled.nav`
 `
 
 const Inspiration = () => {
-  const inspiration = useQueryInspiration()
-  const [currentCategory, setCategory] = useState(null)
+  let inspiration = useQueryInspiration()
+  inspiration = inspiration.map(item => {
+    return {
+      ...item,
+      ...item.acf,
+      title: he.decode(item.title),
+    }
+  })
+  const [currentTag, setTag] = useState(null)
 
-  const updateCategory = (e, category) => {
+  const updateTag = (e, tag) => {
     e.preventDefault()
-
-    if (category !== currentCategory) setCategory(null)
-    if (category === currentCategory) setCategory(category)
+    tag === currentTag ? setTag(null) : setTag(tag)
   }
 
-  let categories = inspiration.map(node => node.category)
-  categories = categories.reduce((x, y) => (x.includes(y) ? x : [...x, y]), [])
-  categories = categories.sort()
+  let tags = inspiration.map(node => node.tags.nodes[0].slug)
+  tags = tags.reduce((x, y) => (x.includes(y) ? x : [...x, y]), [])
+  tags = tags.sort()
 
   return (
     <Base>
@@ -59,24 +66,23 @@ const Inspiration = () => {
         </p>
         <p>This is your world, whatever makes you happy you can put in it.</p>
         <p>Go crazy.</p>
+        {currentTag}
       </Hero>
       <InspiratioNavigation>
-        {categories.map(cat => (
+        {tags.map(tag => (
           <button
-            key={cat}
-            className={
-              currentCategory ? currentCategory === cat && `focused` : `focused`
-            }
+            key={`${tag}-${randomID()}`}
+            className={currentTag && currentTag === tag ? `focused` : `focused`}
             onClick={e => {
-              updateCategory(e, cat)
+              updateTag(e, tag)
             }}
           >
-            {cat}
+            {tag}
           </button>
         ))}
       </InspiratioNavigation>
 
-      <Grid items={inspiration} type="images" filter={currentCategory} />
+      <Grid items={inspiration} type="images" filter={currentTag} />
     </Base>
   )
 }
