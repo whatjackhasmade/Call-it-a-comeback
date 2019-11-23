@@ -1,11 +1,12 @@
-import React, { Component } from "react"
-import { InView } from "react-intersection-observer"
+import React from "react"
 import styled from "styled-components"
-import { Link, StaticQuery, graphql } from "gatsby"
 import moment from "moment"
+import { InView } from "react-intersection-observer"
+import { Link } from "gatsby"
 import { decodeHTML } from "../components/helpers"
 
-import { device } from "../components/particles/MediaQueries"
+import useQueryPosts from "../components/particles/hooks/useQueryPosts"
+import device from "../components/particles/MediaQueries"
 
 import Base from "../components/templates/Base"
 
@@ -73,31 +74,6 @@ const CollectionWrapper = styled.section`
     text-transform: uppercase;
   }
 `
-
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query WordPessPostsPage {
-        wordpress {
-          posts(first: 1500) {
-            nodes {
-              id
-              date
-              seo {
-                metaDesc
-                title
-              }
-              slug
-              title
-            }
-          }
-        }
-      }
-    `}
-    render={query => <Archive query={query} {...props} />}
-  />
-)
-
 function orderByDate(posts) {
   return posts.sort(function(a, b) {
     return new Date(b["date"]) - new Date(a["date"])
@@ -113,7 +89,7 @@ function datesGroupByComponent(dates, token) {
 }
 
 const Archive = ({ query }) => {
-  const posts = query.wordpress.posts.nodes
+  const posts = useQueryPosts()
 
   let postsArchive = orderByDate(posts)
   postsArchive = datesGroupByComponent(postsArchive, "YYYY-MM")
@@ -186,22 +162,18 @@ const Collection = ({ date, posts }) => {
   return null
 }
 
-class CollectionNavigation extends Component {
-  render() {
-    const { ids } = this.props
+const CollectionNavigation = ({ ids }) => (
+  <CollectionMenu>
+    {ids.map(id => {
+      const prettyDate = moment(id, "YYYY-MM").format("MMM YYYY")
 
-    return (
-      <CollectionMenu>
-        {ids.map(id => {
-          const prettyDate = moment(id, "YYYY-MM").format("MMM YYYY")
+      return (
+        <a href={`#${id}`} key={id}>
+          {prettyDate}
+        </a>
+      )
+    })}
+  </CollectionMenu>
+)
 
-          return (
-            <a href={`#${id}`} key={id}>
-              {prettyDate}
-            </a>
-          )
-        })}
-      </CollectionMenu>
-    )
-  }
-}
+export default Archive

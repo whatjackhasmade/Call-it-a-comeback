@@ -1,38 +1,15 @@
 import React, { useState } from "react"
-import { StaticQuery, graphql } from "gatsby"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import ParseHTML from "../../particles/ParseHTML"
+import useQueryDribbble from "../../particles/hooks/useQueryDribbble"
 
 import LogoDribbble from "../../../assets/images/icons/brands/dribbble.svg"
 
 import Intro from "../intro/Intro"
 
 import DribbbleComponent from "./DribbbleStyles"
-
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allDribbble {
-          edges {
-            node {
-              id
-              description
-              html_url
-              images {
-                two_x
-              }
-              title
-            }
-          }
-        }
-      }
-    `}
-    render={query => <Dribbble query={query} {...props} />}
-  />
-)
 
 const settings = {
   autoplay: true,
@@ -76,8 +53,8 @@ const settings = {
   ],
 }
 
-function Dribbble(props) {
-  const { content, query } = props
+const Dribbble = ({ content }) => {
+  const shots = useQueryDribbble()
 
   return (
     <DribbbleComponent>
@@ -89,8 +66,8 @@ function Dribbble(props) {
         {ParseHTML(content)}
       </Intro>
       <Slider {...settings}>
-        {query.allDribbble.edges !== [] &&
-          query.allDribbble.edges.map((shot, index) => (
+        {shots.length > 0 &&
+          shots.map((shot, index) => (
             <Shot index={index} key={shot.node.id} shot={shot} />
           ))}
       </Slider>
@@ -98,7 +75,7 @@ function Dribbble(props) {
   )
 }
 
-function Shot({ index, key, shot }) {
+const Shot = ({ index, key, shot }) => {
   shot = { ...shot.node }
 
   const [mouseOver, setMouseOver] = useState(false)
@@ -139,3 +116,5 @@ function Shot({ index, key, shot }) {
     </div>
   )
 }
+
+export default Dribbble

@@ -1,6 +1,6 @@
 import React from "react"
-import { StaticQuery, graphql } from "gatsby"
 import YouTube from "react-youtube"
+import useQueryYouTube from "../../particles/hooks/useQueryYouTube"
 
 import backgroundLeft from "./youtube-left.png"
 import backgroundRight from "./youtube-right.png"
@@ -15,42 +15,13 @@ const opts = {
   },
 }
 
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allYoutube {
-          edges {
-            node {
-              id
-              snippet {
-                description
-                resourceId {
-                  videoId
-                }
-                title
-                thumbnails {
-                  medium {
-                    url
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={query => <YouTubeChannel query={query} {...props} />}
-  />
-)
+function YouTubeChannel({ data }) {
+  const channelVideos = useQueryYouTube()
 
-function YouTubeChannel({ data, query }) {
   const _onReady = event => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo()
   }
-
-  const channelVideos = query.allYoutube.edges
 
   return (
     <YouTubeComponent>
@@ -145,3 +116,5 @@ function Video({ index, video }) {
     </div>
   )
 }
+
+export default YouTubeChannel
