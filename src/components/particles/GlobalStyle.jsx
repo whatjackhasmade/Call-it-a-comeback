@@ -210,12 +210,8 @@ const GlobalStyle = createGlobalStyle`
 		font-weight: 700;
 		line-height: 1.1;
 
-		@media ${device.xs} {
-			font-size: 48px;
-		}
-
 		@media ${device.lg} {
-			font-size: 72px;
+			font-size: 40px;
 		}
 	}
 
@@ -224,7 +220,7 @@ const GlobalStyle = createGlobalStyle`
 		font-size: 30px;
 
 		@media ${device.lg} {
-			font-size: 48px;
+			font-size: 32px;
 		}
 	}
 
