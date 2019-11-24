@@ -79,11 +79,11 @@ const PostTemplate = props => {
       <InView threshold={0} triggerOnce={false}>
         {({ inView, ref }) => (
           <>
-            <ReadTime
+            {/* <ReadTime
               checkpoint={checkpoint}
               inViewRelated={inView}
               totalWords={totalWords}
-            />
+            /> */}
             <ArticleIntro>
               <Link to="/posts">Insights</Link>
               <h1>{decodeHTML(title)}</h1>
