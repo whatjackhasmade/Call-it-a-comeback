@@ -15,53 +15,59 @@ import { SeriesIntro, SeriesWrapper } from "./SeriesStyles"
 const SeriesTemplate = ({ pageContext }) => (
   <Base context={pageContext}>
     <SeriesWrapper>
-      <SeriesIntro>
-        <div>
+      {pageContext.SeriesFields && (
+        <SeriesIntro>
+          <div>
+            <a
+              href={pageContext.SeriesFields.youtubePlaylist}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <h1>{he.decode(pageContext.name)}</h1>
+            </a>
+            {ParseHTML(autoParagraph(pageContext.description))}
+            <Button
+              href={pageContext.SeriesFields.youtubePlaylist}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              View YouTube Playlist
+            </Button>
+          </div>
           <a
+            className="intro__image"
             href={pageContext.SeriesFields.youtubePlaylist}
             rel="noopener noreferrer"
             target="_blank"
           >
-            <h1>{he.decode(pageContext.name)}</h1>
+            <img
+              alt={pageContext.SeriesFields.seriesImage.altText}
+              src={pageContext.SeriesFields.seriesImage.xl}
+            />
           </a>
-          {ParseHTML(autoParagraph(pageContext.description))}
-          <Button
-            href={pageContext.SeriesFields.youtubePlaylist}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            View YouTube Playlist
-          </Button>
-        </div>
-        <a
-          className="intro__image"
-          href={pageContext.SeriesFields.youtubePlaylist}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img
-            alt={pageContext.SeriesFields.seriesImage.altText}
-            src={pageContext.SeriesFields.seriesImage.xl}
-          />
-        </a>
-      </SeriesIntro>
+        </SeriesIntro>
+      )}
       <HR />
-      <section className="series__grid">
-        {pageContext.posts.nodes.reverse().map(post => (
-          <SeriesPost {...post} />
-        ))}
-      </section>
+      {pageContext.posts.nodes.length > 0 && (
+        <section className="series__grid">
+          {pageContext.posts.nodes.reverse().map(post => (
+            <SeriesPost {...post} />
+          ))}
+        </section>
+      )}
     </SeriesWrapper>
   </Base>
 )
 
 const SeriesPost = ({ featuredImage, title, seo, slug }) => (
   <Link className="post" to={`/${slug}`}>
-    <div className="post__image">
-      <img alt={featuredImage.altText} src={featuredImage.md} />
-    </div>
-    <h2 className="h4">{he.decode(title)}</h2>
-    <p>{seo.metaDesc}</p>
+    {featuredImage && (
+      <div className="post__image">
+        <img alt={featuredImage.altText} src={featuredImage.md} />
+      </div>
+    )}
+    {title && <h2 className="h4">{he.decode(title)}</h2>}
+    {seo && <p>{seo.metaDesc}</p>}
   </Link>
 )
 
