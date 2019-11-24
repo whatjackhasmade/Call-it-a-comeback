@@ -56,7 +56,7 @@ const PostTemplate = props => {
     )
     const squashed = wordCheckpoints.join(` `)
     setParsed(squashed)
-  }, [])
+  }, [content])
 
   useEffect(() => {
     const checkpoints = document.querySelectorAll(".checkpoint")
