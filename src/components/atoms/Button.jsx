@@ -56,6 +56,7 @@ function Button({
   disabled,
   href,
   onClick,
+  rel,
   target,
   type,
 }) {
@@ -66,6 +67,7 @@ function Button({
         href={href}
         className={`button ${className} ${type}`}
         disabled={disabled}
+        rel={target === "_blank" ? "noopener noreferrer" : rel}
         target={target}
       >
         {children}
@@ -76,8 +78,8 @@ function Button({
   return (
     <Btn
       className={`button ${className} ${type}`}
-      onClick={onClick}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </Btn>
