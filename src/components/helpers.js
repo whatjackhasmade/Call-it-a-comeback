@@ -13,6 +13,10 @@ export function httpTohttps(html) {
   return html.replace("http://", "https://")
 }
 
+export function isEmptyObject(obj) {
+  return Object.entries(obj).length === 0 && obj.constructor === Object
+}
+
 export function isInternal(url) {
   if (!url) return false
   if (url.startsWith("mailto:")) return false

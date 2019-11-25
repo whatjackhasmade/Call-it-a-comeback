@@ -3,7 +3,6 @@ const seoFields = require(`../../fragments/seo`)
 
 const youtubeBlock = `
    ... on WORDPRESS_AcfYoutubeBlock {
-    name
 		youtubeFields: acf {
 			media
 		}

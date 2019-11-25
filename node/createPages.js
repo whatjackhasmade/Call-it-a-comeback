@@ -9,7 +9,12 @@ module.exports = async ({ actions, graphql }) => {
     wordpress {
       pages( first: $first ) {
 				nodes {
-					blocks {
+          blocks {
+            isValid
+						name
+						originalContent
+            ${blocks.embedTwitter}
+						${blocks.embedYouTube}
 						${blocks.dribbble}
 						${blocks.github}
 						${blocks.hero}

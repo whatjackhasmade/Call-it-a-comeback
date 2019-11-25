@@ -1,6 +1,7 @@
 const path = require(`path`)
 const mediaFields = require(`./fragments/media`)
 const seoFields = require(`./fragments/seo`)
+const blocks = require(`./blocks/all`)
 
 module.exports = async ({ actions, graphql }) => {
   const GET_POSTS = `
@@ -8,6 +9,22 @@ module.exports = async ({ actions, graphql }) => {
     wordpress {
       posts( first: $first ) {
 				nodes {
+					blocks {
+          	isValid
+						name
+						originalContent
+						${blocks.embedTwitter}
+						${blocks.embedYouTube}
+						${blocks.dribbble}
+						${blocks.github}
+						${blocks.hero}
+						${blocks.intro}
+						${blocks.presentations}
+						${blocks.row}
+						${blocks.testimonials}
+						${blocks.youtube}
+						${blocks.youtubeChannel}
+					}
 				  categories {
 						nodes {
 							name

@@ -3,7 +3,6 @@ const seoFields = require(`../../fragments/seo`)
 
 const testimonialsBlock = `
    ... on WORDPRESS_AcfTestimonialsBlock {
-    name
 		testimonialsFields: acf {
 		  testimonials {
 				author

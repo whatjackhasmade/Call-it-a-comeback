@@ -1,36 +1,21 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Link } from "gatsby"
 import { InView } from "react-intersection-observer"
 import moment from "moment"
 import { decodeHTML } from "../../helpers"
 import ParseHTML from "../../particles/ParseHTML"
+import ComponentParser from "../../particles/ComponentParser"
 
-import { Article, ArticleIntro, ArticleProgress } from "./PostStyles"
+import { Article, ArticleIntro } from "./PostStyles"
 import { RelatedContainer, RelatedItem } from "./RelatedStyles"
 
 import Base from "../Base"
 
 import ImageLoader from "../../molecules/imageloader/ImageLoader"
 
-const WORDS_PER_MINUTE = 250
-
-const ReadTime = ({ checkpoint, inViewRelated, totalWords }) => {
-  const time = Math.ceil(totalWords / WORDS_PER_MINUTE)
-  let left = time - checkpoint
-  if (inViewRelated) left = 0
-  let percentage = (time / 100) * checkpoint
-  if (percentage > 1) percentage = 1
-
-  return (
-    <ArticleProgress left={left}>
-      <p>{left} Minutes left</p>
-    </ArticleProgress>
-  )
-}
-
 const PostTemplate = props => {
   const { pageContext } = props
-  const { content, date, PostFields, title } = pageContext
+  const { blocks = [], content, date, PostFields, title } = pageContext
 
   const related =
     PostFields &&
@@ -40,62 +25,21 @@ const PostTemplate = props => {
 
   const postDate = new Date(date)
 
-  const [checkpoint, setCheckpoint] = useState(0)
-  const [parsed, setParsed] = useState(undefined)
-  const [totalWords, setTotalWords] = useState(0)
-
-  useEffect(() => {
-    const allText = content
-    const words = allText.split(" ")
-    setTotalWords(words.length)
-    const wordCheckpoints = words.map((word, index) =>
-      index > 0 && index % WORDS_PER_MINUTE === 0
-        ? `<span class="checkpoint" data-checkpoint="${index /
-            WORDS_PER_MINUTE}">${word}</span>`
-        : word
-    )
-    const squashed = wordCheckpoints.join(` `)
-    setParsed(squashed)
-  }, [content])
-
-  useEffect(() => {
-    const checkpoints = document.querySelectorAll(".checkpoint")
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.intersectionRatio > 0) {
-          const checkpointHTMLElement = entry.target
-          setCheckpoint(checkpointHTMLElement.getAttribute("data-checkpoint"))
-        }
-      })
-    })
-
-    checkpoints.forEach(checkpoint => {
-      observer.observe(checkpoint)
-    })
-  }, [parsed])
-
   return (
     <Base context={pageContext}>
-      <InView threshold={0} triggerOnce={false}>
-        {({ inView, ref }) => (
-          <>
-            {/* <ReadTime
-              checkpoint={checkpoint}
-              inViewRelated={inView}
-              totalWords={totalWords}
-            /> */}
-            <ArticleIntro>
-              <Link to="/posts">Insights</Link>
-              <h1>{decodeHTML(title)}</h1>
-              <h4>{moment(postDate).format("DD/MM/YYYY")} by Jack Pritchard</h4>
-            </ArticleIntro>
-            <Article>{parsed ? ParseHTML(parsed) : undefined}</Article>
-            {related && related.length > 0 && (
-              <Related data={related} relatedRef={ref} />
-            )}
-          </>
-        )}
-      </InView>
+      <ArticleIntro>
+        <Link to="/posts">Insights</Link>
+        <h1>{decodeHTML(title)}</h1>
+        <h4>{moment(postDate).format("DD/MM/YYYY")} by Jack Pritchard</h4>
+      </ArticleIntro>
+      {blocks.length > 0 ? (
+        <Article>
+          <ComponentParser content={blocks} />
+        </Article>
+      ) : (
+        <Article>{ParseHTML(content)}</Article>
+      )}
+      {related && related.length > 0 && <Related data={related} />}
     </Base>
   )
 }

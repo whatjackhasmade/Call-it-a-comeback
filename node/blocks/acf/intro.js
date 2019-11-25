@@ -3,7 +3,6 @@ const seoFields = require(`../../fragments/seo`)
 
 const introBlock = `
   ... on WORDPRESS_AcfIntroBlock {
-    name
     introFields: acf {
 			content
 			heading

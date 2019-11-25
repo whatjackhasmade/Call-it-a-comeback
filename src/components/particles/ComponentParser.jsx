@@ -1,5 +1,5 @@
 import React from "react"
-import { randomID } from "../helpers"
+import { isEmptyObject, randomID } from "../helpers"
 
 import Dribbble from "../organisms/dribbble/Dribbble"
 import Github from "../organisms/github/Github"
@@ -10,6 +10,7 @@ import Row from "../organisms/row/Row"
 import Testimonials from "../organisms/testimonials/Testimonials"
 import YouTube from "../molecules/embed/youtube/YouTube"
 import YouTubeChannel from "../organisms/youtube/YouTube"
+import ParseHTML from "./ParseHTML"
 
 const components = {
   dribbble: Dribbble,
@@ -21,10 +22,6 @@ const components = {
   testimonials: Testimonials,
   youtube: YouTube,
   youtubechannel: YouTubeChannel,
-}
-
-const isEmpty = obj => {
-  return Object.entries(obj).length === 0 && obj.constructor === Object
 }
 
 const convertACFProps = component => {
@@ -42,7 +39,7 @@ const convertACFProps = component => {
 const sanatizeName = name => {
   if (!name) return null
   let newName = name
-  newName = newName.replace("core/", "")
+  newName = newName.replace("core-embed/", "")
   newName = newName.replace("acf/", "")
   return newName
 }
@@ -51,26 +48,27 @@ const ComponentParser = props => {
   let { content } = props
 
   if (!content) return null
-  content = content.filter(component => component.name !== null)
+  const filteredComponents = content.filter(
+    component =>
+      !component || !isEmptyObject(component) || component.name !== null
+  )
 
-  if (content && content.length > 0) {
-    const pageComponents = content.map((component, index) => {
-      if (isEmpty(component)) return null
-      if (!component) return null
-
+  if (filteredComponents && filteredComponents.length > 0) {
+    const pageComponents = filteredComponents.map((component, index) => {
       const componentName = sanatizeName(component.name)
       const Component = components[componentName]
 
-      component = convertACFProps(component)
+      if (!Component) return ParseHTML(component.originalContent)
 
-      if (!Component) return null
+      component = convertACFProps(component)
 
       return (
         <Component
           index={index}
           key={`component-${randomID()}`}
+          {...component}
           {...component.data}
-          theme={props.theme}
+          {...component.attributes}
         />
       )
     })
