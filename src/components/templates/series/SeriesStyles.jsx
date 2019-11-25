@@ -3,7 +3,12 @@ import { device } from "../../particles/MediaQueries"
 
 export const SeriesIntro = styled.header`
   display: flex;
+  flex-direction: column-reverse;
   margin: 64px auto;
+
+  @media ${device.md} {
+    flex-direction: row;
+  }
 
   .button {
     color: white;
@@ -11,10 +16,15 @@ export const SeriesIntro = styled.header`
 
   .intro__image {
     display: block;
-    margin-left: 64px;
-    min-width: 45%;
+    margin-bottom: 24px;
 
-    transform: rotate(2.5deg) translateY(30px);
+    @media ${device.md} {
+      margin-bottom: 0;
+      margin-left: 64px;
+      min-width: 45%;
+
+      transform: rotate(2.5deg) translateY(30px);
+    }
 
     img {
       display: block;
