@@ -27,10 +27,12 @@ module.exports = {
         // Url to query from
         url: "https://wjhm.noface.app/graphql",
         // refetch interval in seconds
-        refetchInterval: 600,
+        // refetchInterval: 600,
       },
     },
     `gatsby-source-bonus`,
+    `gatsby-plugin-typescript`,
+    `gatsby-plugin-tslint`,
     `gatsby-plugin-favicon`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-layout`,

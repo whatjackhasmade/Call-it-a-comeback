@@ -60,6 +60,8 @@
     "typescript": "^3.7.2"
   },
   "scripts": {
+    "type-check": "tsc --noEmit",
+    "lint": "tslint --project .",
     "build": "gatsby build",
     "d": "gatsby develop",
     "develop": "gatsby develop",
