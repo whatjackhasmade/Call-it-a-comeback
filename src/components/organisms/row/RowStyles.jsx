@@ -123,7 +123,7 @@ const RowComponent = styled.section`
     flex-direction: ${props => props.align === "right" && "row-reverse"};
     opacity: 0;
     transform: ${props =>
-      props.align === "right" ? "translateX(50px)" : "translateX(-50px)"};
+      props.align !== "right" ? "translateX(-50px)" : "translateX(50px)"};
     transition: 0.6s all ease;
 
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -170,7 +170,7 @@ const RowComponent = styled.section`
       video {
         opacity: 0;
         transform: ${props =>
-          props.align === "translateX(-100%)" && "translateX(100%)"};
+          props.align === "right" ? "translateX(-100%)" : "translateX(100%)"};
         transition: 1s all ease;
         transition-delay: 0.4s;
       }
