@@ -3,18 +3,29 @@ import ParseHTML from "../../particles/ParseHTML"
 
 import IntroComponent from "./IntroStyles"
 
-const Intro = props => {
-  const {
-    children,
-    content,
-    heading,
-    illustration,
-    index,
-    maxWidth,
-    marginReduced,
-    subheading,
-  } = props
+type IntroProps = {
+  children: any
+  content: string
+  heading: string
+  illustration: {
+    mediaItemUrl: string
+  }
+  index: number
+  maxWidth: number
+  marginReduced: boolean
+  subheading: string
+}
 
+const Intro = ({
+  children,
+  content,
+  heading,
+  illustration,
+  index,
+  maxWidth,
+  marginReduced,
+  subheading,
+}: IntroProps) => {
   const Subheading = index === 0 ? `h1` : `h2`
   const Heading = index === 0 ? `h2` : `h3`
 

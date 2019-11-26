@@ -10,7 +10,7 @@ import device from "../components/particles/MediaQueries"
 
 import Base from "../components/templates/Base"
 
-import Intro from "../components/organisms/intro/Intro"
+import Intro from "../components/organisms/intro/Intro.tsx"
 
 const CollectionMenu = styled.nav`
   display: none;

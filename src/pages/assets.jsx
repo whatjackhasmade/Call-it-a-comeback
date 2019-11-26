@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-grid-system"
 
 import Base from "../components/templates/Base"
 
-import Hero from "../components/organisms/hero/Hero"
+import Hero from "../components/organisms/hero/Hero.tsx"
 
 const AssetsContainer = styled.section`
   margin: 64px 0;

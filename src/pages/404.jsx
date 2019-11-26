@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 
 import Base from "../components/templates/Base"
 
-import Hero from "../components/organisms/hero/Hero"
+import Hero from "../components/organisms/hero/Hero.tsx"
 
 const Four0Four = () => (
   <Base>

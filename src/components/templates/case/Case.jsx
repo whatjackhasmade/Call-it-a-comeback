@@ -20,8 +20,8 @@ import Base from "../Base"
 
 import ImageLoader from "../../molecules/imageloader/ImageLoader"
 
-import Intro from "../../organisms/intro/Intro"
-import Testimonials from "../../organisms/testimonials/Testimonials"
+import Intro from "../../organisms/intro/Intro.tsx"
+import Testimonials from "../../organisms/testimonials/Testimonials.tsx"
 
 const breakpoints = {
   xs: 576,

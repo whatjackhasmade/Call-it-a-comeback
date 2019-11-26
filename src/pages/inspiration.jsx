@@ -6,7 +6,7 @@ import he from "he"
 
 import Base from "../components/templates/Base"
 
-import Hero from "../components/organisms/hero/Hero"
+import Hero from "../components/organisms/hero/Hero.tsx"
 import Grid from "../components/organisms/grid/Grid"
 
 const InspiratioNavigation = styled.nav`

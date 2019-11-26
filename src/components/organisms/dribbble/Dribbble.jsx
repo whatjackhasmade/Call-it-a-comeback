@@ -7,7 +7,7 @@ import useQueryDribbble from "../../particles/hooks/useQueryDribbble"
 
 import LogoDribbble from "../../../assets/images/icons/brands/dribbble.svg"
 
-import Intro from "../intro/Intro"
+import Intro from "../intro/Intro.tsx"
 
 import DribbbleComponent from "./DribbbleStyles"
 

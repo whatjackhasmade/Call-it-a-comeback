@@ -3,7 +3,7 @@ import ParseHTML from "../../particles/ParseHTML"
 
 import GithubComponent from "./Github-Styles"
 
-import Intro from "../intro/Intro"
+import Intro from "../intro/Intro.tsx"
 
 const Github = ({ content }) => {
   return (
