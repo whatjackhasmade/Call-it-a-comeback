@@ -5,6 +5,8 @@
   "version": "2.0.0",
   "author": "Jack Pritchard (@whatjackhasmade)",
   "dependencies": {
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
     "dotenv": "8.1.0",
     "gatsby": "^2.17.11",
     "gatsby-link": "^2.2.24",
@@ -23,6 +25,8 @@
     "gatsby-plugin-robots-txt": "1.5.0",
     "gatsby-plugin-sitemap": "2.2.12",
     "gatsby-plugin-styled-components": "3.1.5",
+    "gatsby-plugin-tslint": "0.0.2",
+    "gatsby-plugin-typescript": "^2.1.20",
     "gatsby-source-graphql": "^2.1.22",
     "he": "^1.2.0",
     "html-react-parser": "0.9.1",
@@ -47,7 +51,13 @@
     "sanitize-html-react": "^1.13.0",
     "slick-carousel": "1.8.1",
     "smooth-scroll": "16.1.0",
-    "styled-components": "4.3.2"
+    "styled-components": "4.3.2",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-loader": "^3.5.4",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^4.1.0",
+    "typescript": "^3.7.2"
   },
   "scripts": {
     "build": "gatsby build",
