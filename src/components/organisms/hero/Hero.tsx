@@ -5,14 +5,26 @@ import Duotone from "./Duotone"
 import HeroComponent from "./HeroStyles"
 import HeroMediaComponent from "./HeroMediaStyles"
 
-function Hero({
+type HeroProps = {
+  background_colour: string
+  children: string
+  content: string
+  duotone: string
+  media: {
+    altText: string
+    mediaItemUrl: string
+  }
+  overlay: string
+}
+
+const Hero = ({
   background_colour,
   children,
   content,
   duotone,
   media,
   overlay,
-}) {
+}: HeroProps) => {
   if (!content) {
     return (
       <HeroComponent>
