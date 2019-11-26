@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
-import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import Slider from "react-slick"
 
 import IconAngleRight from "../../../assets/images/icons/solid/angle-right.svg"
 
@@ -13,14 +13,26 @@ const settings = {
   lazyLoad: false,
   nextArrow: false,
   prevArrow: false,
-  slidesToShow: 1,
   slidesToScroll: 1,
+  slidesToShow: 1,
   speed: 1000,
   swipe: false,
   swipeToSlide: false,
 }
 
-const Testimonials = ({ testimonials }) => {
+type TestimonialsProps = {
+  testimonials: object[]
+}
+
+type TestimonialProps = {
+  author: string
+  logo: string
+  media: object
+  role: string
+  testimonial: string
+}
+
+const Testimonials = ({ testimonials }: TestimonialsProps) => {
   const sliderImages = useRef(null)
   const sliderTestimonials = useRef(null)
 
@@ -34,13 +46,11 @@ const Testimonials = ({ testimonials }) => {
     <TestimonialsComponent>
       <div className="testimonial__media">
         <Slider ref={sliderImages} {...settings}>
-          {testimonials.map((testimonial, index) => (
-            <img
-              src={testimonial.media.mediaItemUrl}
-              alt={testimonial.author}
-              key={testimonial.author}
-            />
-          ))}
+          {testimonials.map(
+            ({ author, media }): TestimonialProps => (
+              <img src={media.mediaItemUrl} alt={author} key={author} />
+            )
+          )}
         </Slider>
       </div>
       {testimonials && testimonials.length > 1 && (
@@ -50,25 +60,20 @@ const Testimonials = ({ testimonials }) => {
       )}
       <div className="testimonials">
         <Slider ref={sliderTestimonials} {...settings}>
-          {testimonials.map((testimonial, index) => (
-            <div
-              className="testimonial"
-              key={`testimonial-${testimonial.author}`}
-            >
-              <header className="testimonial__header">
-                <div>
-                  <h3 className="testimonial__author">{testimonial.author}</h3>
-                  <h4 className="testimonial__role">{testimonial.role}</h4>
-                </div>
-                <img
-                  className="testimonial__logo"
-                  src={testimonial.logo}
-                  alt=""
-                />
-              </header>
-              <p className="testimonial__quote">"{testimonial.testimonial}"</p>
-            </div>
-          ))}
+          {testimonials.map(
+            ({ author, logo, role, testimonial }): TestimonialProps => (
+              <div className="testimonial" key={`testimonial-${author}`}>
+                <header className="testimonial__header">
+                  <div>
+                    <h3 className="testimonial__author">{author}</h3>
+                    <h4 className="testimonial__role">{role}</h4>
+                  </div>
+                  <img className="testimonial__logo" src={logo} alt="" />
+                </header>
+                <p className="testimonial__quote">"{testimonial}"</p>
+              </div>
+            )
+          )}
         </Slider>
       </div>
     </TestimonialsComponent>
