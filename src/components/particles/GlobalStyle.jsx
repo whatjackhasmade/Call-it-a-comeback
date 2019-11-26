@@ -165,6 +165,11 @@ const GlobalStyle = createGlobalStyle`
 		max-width: 100%;
 	}
 
+	video {
+		display: block;
+		width: 100%;
+	}
+
 	button,
 	input[type="submit"] {
 		display: inline-flex;
