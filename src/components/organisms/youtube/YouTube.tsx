@@ -8,14 +8,16 @@ import YouTubeComponent from "./YouTube-Styles"
 
 import ImageLoader from "../../molecules/imageloader/ImageLoader"
 
+// https://developers.google.com/youtube/player_parameters
 const opts = {
   playerVars: {
-    // https://developers.google.com/youtube/player_parameters
     autoplay: 0,
   },
 }
 
-function YouTubeChannel({ data }) {
+type YouTubeChannelProps = {}
+
+const YouTubeChannel = ({}: YouTubeChannelProps) => {
   const channelVideos = useQueryYouTube()
 
   const _onReady = event => {
@@ -61,8 +63,7 @@ function YouTubeChannel({ data }) {
             View My YouTube Channel
           </a>
           {channelVideos &&
-            channelVideos !== [] &&
-            channelVideos[0] &&
+            channelVideos.length &&
             channelVideos[0].node.snippet && (
               <div
                 className="youtube__video"
@@ -78,16 +79,12 @@ function YouTubeChannel({ data }) {
         </div>
         <div className="youtube__videos">
           {channelVideos &&
-            channelVideos !== [] &&
+            channelVideos.length &&
             channelVideos.map((video, index) => {
               if (index > 0 && index < 19) {
                 const data = video.node
                 return (
-                  <Video
-                    index={index}
-                    key={data.snippet.resourceId.videoId}
-                    video={data}
-                  />
+                  <Video key={data.snippet.resourceId.videoId} video={data} />
                 )
               }
               return null
@@ -98,9 +95,9 @@ function YouTubeChannel({ data }) {
   )
 }
 
-function Video({ index, video }) {
+function Video({ video }) {
   return (
-    <div index={index} className="youtube__video" title={video.snippet.title}>
+    <div className="youtube__video" title={video.snippet.title}>
       <a
         href={`https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`}
         rel="noopener noreferrer"
