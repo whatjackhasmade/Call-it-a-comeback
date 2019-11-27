@@ -4,9 +4,9 @@ import { YouTubeGetID } from "../../../helpers"
 
 import YouTubeComponent from "./YouTubeStyles"
 
+// https://developers.google.com/youtube/player_parameters
 const opts = {
   playerVars: {
-    // https://developers.google.com/youtube/player_parameters
     autoplay: 0,
   },
 }
@@ -16,23 +16,29 @@ const _onReady = event => {
   event.target.pauseVideo()
 }
 
-const YouTubeBlock = props => {
-  const { attributes, children } = props
-  const { url } = attributes
+type YouTubeProps = {
+  attributes: {
+    url: string
+  }
+  children: any
+}
 
-  if (url) {
+const YouTubeBlock = ({ attributes: { url }, children }: YouTubeProps) => {
+  if (url || !children) return null
+
+  if (!url) {
     return (
       <YouTubeComponent>
-        <div className="youtube__wrapper">
-          <YouTube videoId={YouTubeGetID(url)} opts={opts} onReady={_onReady} />
-        </div>
+        <div className="youtube__contents">{children}</div>
       </YouTubeComponent>
     )
   }
 
   return (
     <YouTubeComponent>
-      <div className="youtube__contents">{children}</div>
+      <div className="youtube__wrapper">
+        <YouTube videoId={YouTubeGetID(url)} opts={opts} onReady={_onReady} />
+      </div>
     </YouTubeComponent>
   )
 }
