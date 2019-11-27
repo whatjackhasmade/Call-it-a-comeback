@@ -8,7 +8,9 @@ import IconLinkedIn from "../../../assets/images/icons/brands/linkedin.svg"
 import IconTwitter from "../../../assets/images/icons/brands/twitter.svg"
 import IconYouTube from "../../../assets/images/icons/brands/youtube.svg"
 
-function Footer() {
+type FooterProps = {}
+
+const Footer = ({}: FooterProps) => {
   useEffect(() => {
     if (typeof window !== `undefined`) {
       MailtoUI.run() // <--- Run MailtoUI manually
