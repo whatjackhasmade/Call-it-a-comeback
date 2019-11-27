@@ -8,7 +8,7 @@ import GlobalStyle from "../particles/GlobalStyle"
 import SEO from "../particles/SEO"
 import ThemeDefault from "../particles/ThemeDefault"
 
-import Contact from "../organisms/contact/Contact"
+import Contact from "../organisms/contact/Contact.tsx"
 import Footer from "../organisms/footer/Footer"
 import Header from "../organisms/header/Header"
 
