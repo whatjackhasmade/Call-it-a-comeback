@@ -27,7 +27,9 @@ type TestimonialsProps = {
 type TestimonialProps = {
   author: string
   logo: string
-  media: object
+  media: {
+    mediaItemUrl: string
+  }
   role: string
   testimonial: string
 }
