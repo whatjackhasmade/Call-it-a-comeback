@@ -7,53 +7,17 @@ import useQueryDribbble from "../../particles/hooks/useQueryDribbble"
 
 import LogoDribbble from "../../../assets/images/icons/brands/dribbble.svg"
 
-import Intro from "../intro/Intro.tsx"
+import Intro from "../intro/Intro"
 
 import DribbbleComponent from "./DribbbleStyles"
 
-const settings = {
-  autoplay: true,
-  autoplaySpeed: 5000,
-  dots: true,
-  infinite: true,
-  nextArrow: false,
-  prevArrow: false,
-  speed: 500,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1440,
-      settings: {
-        slidesToShow: 4,
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 750,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 500,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
+import settings from "./DribbbleSettings.json"
+
+type DribbbleProps = {
+  content: string
 }
 
-const Dribbble = ({ content }) => {
+const Dribbble = ({ content }: DribbbleProps) => {
   const shots = useQueryDribbble()
 
   return (
@@ -67,15 +31,13 @@ const Dribbble = ({ content }) => {
       </Intro>
       <Slider {...settings}>
         {shots.length > 0 &&
-          shots.map((shot, index) => (
-            <Shot index={index} key={shot.node.id} shot={shot} />
-          ))}
+          shots.map(shot => <Shot key={shot.node.id} shot={shot} />)}
       </Slider>
     </DribbbleComponent>
   )
 }
 
-const Shot = ({ index, key, shot }) => {
+const Shot = ({ shot }) => {
   shot = { ...shot.node }
 
   const [mouseOver, setMouseOver] = useState(false)
@@ -89,8 +51,6 @@ const Shot = ({ index, key, shot }) => {
       className={
         mouseOver ? `dribbble__shot dribbble__shot--animate` : `dribbble__shot`
       }
-      index={index}
-      data-index={index}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
     >

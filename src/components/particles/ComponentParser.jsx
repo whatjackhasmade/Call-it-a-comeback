@@ -1,7 +1,7 @@
 import React from "react"
 import { isEmptyObject, randomID } from "../helpers"
 
-import Dribbble from "../organisms/dribbble/Dribbble"
+import Dribbble from "../organisms/dribbble/Dribbble.tsx"
 import Github from "../organisms/github/Github"
 import Hero from "../organisms/hero/Hero.tsx"
 import Intro from "../organisms/intro/Intro.tsx"

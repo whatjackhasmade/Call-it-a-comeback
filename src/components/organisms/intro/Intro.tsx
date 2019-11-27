@@ -4,14 +4,14 @@ import ParseHTML from "../../particles/ParseHTML"
 import IntroComponent from "./IntroStyles"
 
 type IntroProps = {
-  children: any
-  content: string
+  children?: any
+  content?: string
   heading: string
-  illustration: {
+  illustration?: {
     mediaItemUrl: string
   }
-  index: number
-  maxWidth: number
+  index?: number
+  maxWidth?: number
   marginReduced: boolean
   subheading: string
 }
