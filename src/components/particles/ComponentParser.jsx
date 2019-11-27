@@ -2,14 +2,14 @@ import React from "react"
 import { isEmptyObject, randomID } from "../helpers"
 
 import Dribbble from "../organisms/dribbble/Dribbble.tsx"
-import Github from "../organisms/github/Github"
+import Github from "../organisms/github/Github.tsx"
 import Hero from "../organisms/hero/Hero.tsx"
 import Intro from "../organisms/intro/Intro.tsx"
 import Presentations from "../organisms/presentations/Presentations.tsx"
 import Row from "../organisms/row/Row.tsx"
 import Testimonials from "../organisms/testimonials/Testimonials.tsx"
-import YouTube from "../molecules/embed/youtube/YouTube"
-import YouTubeChannel from "../organisms/youtube/YouTube"
+import YouTube from "../molecules/embed/youtube/YouTube.tsx"
+import YouTubeChannel from "../organisms/youtube/YouTube.tsx"
 import ParseHTML from "./ParseHTML"
 
 const components = {
