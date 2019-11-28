@@ -7,7 +7,7 @@ import useQueryPresentations from "../../particles/hooks/useQueryPresentations"
 
 import PresentationsComponent from "./PresentationsStyles"
 
-import Intro from "../intro/Intro.tsx"
+import Intro from "../intro/Intro"
 
 import settings from "./PresentationsSettings.json"
 

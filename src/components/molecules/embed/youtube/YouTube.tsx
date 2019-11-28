@@ -24,8 +24,6 @@ type YouTubeProps = {
 }
 
 const YouTubeBlock = ({ attributes: { url }, children }: YouTubeProps) => {
-  if (url || !children) return null
-
   if (!url) {
     return (
       <YouTubeComponent>
@@ -33,6 +31,8 @@ const YouTubeBlock = ({ attributes: { url }, children }: YouTubeProps) => {
       </YouTubeComponent>
     )
   }
+
+  console.log(YouTubeGetID(url))
 
   return (
     <YouTubeComponent>

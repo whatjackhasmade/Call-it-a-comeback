@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import Base from "../components/templates/Base"
 
-import Hero from "../components/organisms/hero/Hero.tsx"
+import Hero from "../components/organisms/hero/Hero"
 
 import TweetsContainer from "./twitterStyles"
 

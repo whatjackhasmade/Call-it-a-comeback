@@ -6,7 +6,7 @@ import Base from "../components/templates/Base"
 
 import Button from "../components/atoms/button/Button"
 
-import Hero from "../components/organisms/hero/Hero.tsx"
+import Hero from "../components/organisms/hero/Hero"
 
 import UXVideo1 from "../assets/videos/ux-motion/1.mp4"
 import UXVideo2 from "../assets/videos/ux-motion/2.mp4"

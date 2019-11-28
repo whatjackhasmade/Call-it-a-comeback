@@ -2,7 +2,7 @@ import React from "react"
 import Link from "gatsby-link"
 import Base from "../components/templates/Base"
 
-import Hero from "../components/organisms/hero/Hero.tsx"
+import Hero from "../components/organisms/hero/Hero"
 
 const Four0Four = () => (
   <Base>
