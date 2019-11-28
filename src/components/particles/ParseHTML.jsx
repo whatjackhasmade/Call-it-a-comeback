@@ -1,6 +1,6 @@
 import React from "react"
 import Parser from "html-react-parser"
-import { Link } from "gatsby"
+import Link from "gatsby-link"
 import { isInternal } from "../helpers"
 import useRelative from "./hooks/useRelative"
 

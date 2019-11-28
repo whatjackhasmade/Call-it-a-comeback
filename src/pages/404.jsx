@@ -1,6 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
-
+import Link from "gatsby-link"
 import Base from "../components/templates/Base"
 
 import Hero from "../components/organisms/hero/Hero.tsx"

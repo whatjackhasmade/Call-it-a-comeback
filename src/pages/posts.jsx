@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import moment from "moment"
 import { InView } from "react-intersection-observer"
-import { Link } from "gatsby"
+import Link from "gatsby-link"
 import { decodeHTML } from "../components/helpers"
 
 import useQueryPosts from "../components/particles/hooks/useQueryPosts"
