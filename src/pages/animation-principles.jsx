@@ -4,7 +4,7 @@ import { device } from "../components/particles/MediaQueries"
 
 import Base from "../components/templates/Base"
 
-import Button from "../components/atoms/Button"
+import Button from "../components/atoms/button/Button"
 
 import Hero from "../components/organisms/hero/Hero.tsx"
 
