@@ -105,8 +105,8 @@ function Video({ video }) {
       >
         <div className="youtube__video__thumbnail">
           <ImageLoader
-            src={video.snippet.thumbnails.medium.url}
             alt={video.snippet.title}
+            src={video.snippet.thumbnails.medium.url}
           />
         </div>
       </a>
