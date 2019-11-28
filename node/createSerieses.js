@@ -46,7 +46,7 @@ module.exports = async ({ actions, graphql }) => {
 
       actions.createPage({
         path: `/${series.slug}`,
-        component: path.resolve(`./src/components/templates/series/Series.jsx`),
+        component: path.resolve(`./src/components/templates/series/Series.tsx`),
         context: {
           ...series,
           slug: series.slug,

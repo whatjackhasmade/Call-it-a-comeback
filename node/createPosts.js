@@ -74,7 +74,7 @@ module.exports = async ({ actions, graphql }) => {
 
       actions.createPage({
         path: `/${post.uri}`,
-        component: path.resolve(`./src/components/templates/post/Post.jsx`),
+        component: path.resolve(`./src/components/templates/post/Post.tsx`),
         context: {
           ...post,
           id: post.id,

@@ -50,7 +50,7 @@ module.exports = async ({ actions, graphql }) => {
 
       actions.createPage({
         path: uri,
-        component: path.resolve(`./src/components/templates/Page.jsx`),
+        component: path.resolve(`./src/components/templates/Page.tsx`),
         context: {
           ...page,
           title: page.title,

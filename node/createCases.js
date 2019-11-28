@@ -89,7 +89,7 @@ module.exports = async ({ actions, graphql }) => {
 
       actions.createPage({
         path: `/${caseStudy.uri}`,
-        component: path.resolve(`./src/components/templates/case/Case.jsx`),
+        component: path.resolve(`./src/components/templates/case/Case.tsx`),
         context: {
           ...caseStudy,
           id: caseStudy.id,
