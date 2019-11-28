@@ -1,7 +1,6 @@
-import React from "react"
 import styled from "styled-components"
 
-const Btn = styled.button`
+const StyledButton = styled.button`
   display: inline-flex;
   padding: 16px 24px;
 
@@ -50,40 +49,4 @@ const Btn = styled.button`
   }
 `
 
-function Button({
-  className,
-  children,
-  disabled,
-  href,
-  onClick,
-  rel,
-  target,
-  type,
-}) {
-  if (href) {
-    const BtnLink = Btn.withComponent("a")
-    return (
-      <BtnLink
-        href={href}
-        className={`button ${className} ${type}`}
-        disabled={disabled}
-        rel={target === "_blank" ? "noopener noreferrer" : rel}
-        target={target}
-      >
-        {children}
-      </BtnLink>
-    )
-  }
-
-  return (
-    <Btn
-      className={`button ${className} ${type}`}
-      disabled={disabled}
-      onClick={onClick}
-    >
-      {children}
-    </Btn>
-  )
-}
-
-export default Button
+export default StyledButton
