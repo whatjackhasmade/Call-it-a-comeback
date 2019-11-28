@@ -8,7 +8,7 @@ import GlobalStyle from "../particles/GlobalStyle"
 import SEO from "../particles/SEO"
 import ThemeDefault from "../particles/ThemeDefault"
 
-import Contact from "../organisms/contact/Contact.tsx"
+import Contact from "../organisms/contact/Contact"
 import Footer from "../organisms/footer/Footer"
 import Header from "../organisms/header/Header"
 
@@ -18,23 +18,30 @@ if (typeof window !== "undefined") {
   require("smooth-scroll")('a[href*="#"]')
 }
 
-const Base = props => {
-  const { children, context, cta } = props
-  return (
-    <ThemeProvider theme={ThemeDefault}>
-      <React.Fragment>
-        <GlobalStyle />
-        <Helmet title={config.siteTitle} />
-        <SEO data={context} />
-        <div className="wrapper">
-          <Header />
-          <main>{children}</main>
-          {cta !== false && <Contact />}
-          <Footer />
-        </div>
-      </React.Fragment>
-    </ThemeProvider>
-  )
+type BaseProps = {
+  children: any
+  context: any
+  cta: boolean
+}
+
+const Base = ({ children, context, cta }: BaseProps) => (
+  <ThemeProvider theme={ThemeDefault}>
+    <React.Fragment>
+      <GlobalStyle />
+      <Helmet title={config.siteTitle} />
+      <SEO data={context} />
+      <div className="wrapper">
+        <Header />
+        <main>{children}</main>
+        {cta !== false && <Contact />}
+        <Footer />
+      </div>
+    </React.Fragment>
+  </ThemeProvider>
+)
+
+Base.defaultProps = {
+  cta: false,
 }
 
 export default Base
