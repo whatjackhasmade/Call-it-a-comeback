@@ -4,7 +4,11 @@ import Base from "./Base"
 
 import ComponentParser from "../particles/ComponentParser"
 
-const PageTemplate = ({ pageContext }) => (
+type PageProps = {
+  pageContext: any
+}
+
+const PageTemplate = ({ pageContext }: PageProps) => (
   <Base context={pageContext}>
     <ComponentParser content={pageContext.blocks} />
   </Base>
