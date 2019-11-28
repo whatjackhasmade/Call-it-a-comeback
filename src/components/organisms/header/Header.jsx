@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "gatsby"
+import Link from "gatsby-link"
 import MailtoUI from "mailtoui/dist/mailtoui-min.js"
 import { useRelative } from "../../particles/hooks/useRelative"
 import { useSiteMenuData } from "../../particles/hooks/useSiteMenuData"
