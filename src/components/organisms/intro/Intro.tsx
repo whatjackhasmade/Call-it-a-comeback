@@ -11,8 +11,8 @@ type IntroProps = {
     mediaItemUrl: string
   }
   index?: number
-  maxWidth?: number
-  marginReduced: boolean
+  maxWidth?: string
+  marginReduced?: boolean
   subheading: string
 }
 
