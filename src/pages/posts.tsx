@@ -75,9 +75,7 @@ const CollectionWrapper = styled.section`
   }
 `
 function orderByDate(posts) {
-  return posts.sort(function(a, b) {
-    return new Date(b["date"]) - new Date(a["date"])
-  })
+  return posts.sort((a, b) => new Date(b["date"]) - new Date(a["date"]))
 }
 
 function datesGroupByComponent(dates, token) {
@@ -96,7 +94,7 @@ const Archive = ({ query }) => {
 
   let datesArray = []
 
-  Object.keys(postsArchive).map((key, index) => {
+  Object.keys(postsArchive).map(key => {
     if (postsArchive[key] !== undefined) datesArray.push(key)
     return null
   })

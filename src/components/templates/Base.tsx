@@ -19,12 +19,12 @@ if (typeof window !== "undefined") {
 }
 
 type BaseProps = {
-  children: any
-  context: any
+  children?: any
+  context?: any
   cta: boolean
 }
 
-const Base = ({ children, context, cta }: BaseProps) => (
+const Base = ({ children, context, cta = true }: BaseProps) => (
   <ThemeProvider theme={ThemeDefault}>
     <React.Fragment>
       <GlobalStyle />

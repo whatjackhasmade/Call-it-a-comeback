@@ -6,24 +6,24 @@ import HeroComponent from "./HeroStyles"
 import HeroMediaComponent from "./HeroMediaStyles"
 
 type HeroProps = {
-  background_colour: string
-  children: string
-  content: string
-  duotone: string
-  media: {
+  background_colour?: string
+  children?: any
+  content?: string
+  duotone?: boolean
+  media?: {
     altText: string
     mediaItemUrl: string
   }
-  overlay: string
+  overlay?: boolean
 }
 
 const Hero = ({
   background_colour,
   children,
   content,
-  duotone,
+  duotone = false,
   media,
-  overlay,
+  overlay = true,
 }: HeroProps) => {
   if (!content) {
     return (

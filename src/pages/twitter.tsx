@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from "react"
 
 import Base from "../components/templates/Base"
 
@@ -6,22 +6,20 @@ import Hero from "../components/organisms/hero/Hero"
 
 import TweetsContainer from "./twitterStyles"
 
-export default class Twitter extends Component {
-  state = {
-    tweets: [],
-  }
+const Twitter = () => {
+  const [tweets, setTweets] = useState([])
 
-  componentDidMount() {
+  useEffect(() => {
     fetch("https://wjhm-node-twitter-feed.herokuapp.com/")
       .then(res => {
         return res.json()
       })
-      .then(json => {
-        this.setState({ tweets: json })
+      .then(tweets => {
+        setTweets(tweets)
       })
-  }
+  }, [])
 
-  heartGenerator(count) {
+  const heartGenerator = count => {
     let hearts = []
     for (var i = 0; i < count; i++) {
       hearts.push("❤")
@@ -29,24 +27,22 @@ export default class Twitter extends Component {
     return hearts
   }
 
-  render() {
-    return (
-      <Base cta={false}>
-        <Hero>
-          <h1>Tweets</h1>
-          <h3>Some of my social media ramblings</h3>
-        </Hero>
-        <TweetsContainer>
-          {this.state.tweets.map(tweet => (
-            <div className="tweet" key={tweet.id}>
-              {tweet.text}
-              <div className="tweet__favourites">
-                {this.heartGenerator(tweet.favorite_count)}
-              </div>
+  return (
+    <Base cta={false}>
+      <Hero>
+        <h1>Tweets</h1>
+        <h3>Some of my social media ramblings</h3>
+      </Hero>
+      <TweetsContainer>
+        {tweets.map(tweet => (
+          <div className="tweet" key={tweet.id}>
+            {tweet.text}
+            <div className="tweet__favourites">
+              {heartGenerator(tweet.favorite_count)}
             </div>
-          ))}
-        </TweetsContainer>
-      </Base>
-    )
-  }
+          </div>
+        ))}
+      </TweetsContainer>
+    </Base>
+  )
 }
