@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { device } from "../../particles/MediaQueries"
 
-export const RelatedContainer = styled.section`
+export const RelatedWrapper = styled.section`
   margin: 96px auto;
 
   h2 {
