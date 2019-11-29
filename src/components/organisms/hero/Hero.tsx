@@ -61,11 +61,7 @@ function HeroMedia({ alt, background, duotone, media, overlay }) {
   if (duotone) {
     return (
       <HeroMediaComponent background={background} overlay={overlay}>
-        <Duotone
-          className="hero__media"
-          highlight={props => props.theme.primary}
-          shadow={`#000`}
-        >
+        <Duotone className="hero__media">
           <img src={media} alt={alt} />
         </Duotone>
       </HeroMediaComponent>
