@@ -78,8 +78,8 @@ const HeroComponent = styled.section`
   }
 
   .hero__contents {
-    margin: 0 auto 0 0;
-    max-width: 686px;
+    margin: ${props => (props.align === "center" ? "0 auto" : "0 auto 0 0")};
+    max-width: ${props => (props.maxWidth ? props.maxWidth : "686px")};
     position: relative;
     width: 100%;
     z-index: 3;

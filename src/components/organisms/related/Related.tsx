@@ -10,12 +10,17 @@ import ImageLoader from "../../molecules/imageloader/ImageLoader"
 type RelatedProps = {
   data: any
   relatedRef?: any
+  title?: string
 }
 
-const Related = ({ data, relatedRef }: RelatedProps) => (
+const Related = ({
+  data,
+  relatedRef,
+  title = "Continue Reading",
+}: RelatedProps) => (
   <RelatedWrapper ref={relatedRef}>
     <h2>
-      Continue Reading{" "}
+      {title}{" "}
       <span aria-label="book pile emoji" role="img">
         📚
       </span>

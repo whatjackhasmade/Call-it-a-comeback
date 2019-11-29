@@ -40,6 +40,9 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    { resolve: `gatsby-source-filesystem`, options: { path: `./src/assets/` } },
     {
       resolve: `gatsby-plugin-hotjar`,
       options: {

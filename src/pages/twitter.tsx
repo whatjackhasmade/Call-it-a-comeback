@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react"
 
-import Base from "../components/templates/Base"
-
 import Hero from "../components/organisms/hero/Hero"
+
+import Base from "../components/templates/Base"
 
 import TweetsContainer from "./twitterStyles"
 
-const Twitter = () => {
+type TwitterPageProps = {}
+type TweetProps = {
+  favorite_count: number
+  id: string
+  text: string
+}
+
+const Twitter = ({}: TwitterPageProps) => {
   const [tweets, setTweets] = useState([])
 
   useEffect(() => {
@@ -34,11 +41,11 @@ const Twitter = () => {
         <h3>Some of my social media ramblings</h3>
       </Hero>
       <TweetsContainer>
-        {tweets.map(tweet => (
-          <div className="tweet" key={tweet.id}>
-            {tweet.text}
+        {tweets.map(({ favorite_count, id, text }: TweetProps) => (
+          <div className="tweet" key={id}>
+            {text}
             <div className="tweet__favourites">
-              {heartGenerator(tweet.favorite_count)}
+              {heartGenerator(favorite_count)}
             </div>
           </div>
         ))}

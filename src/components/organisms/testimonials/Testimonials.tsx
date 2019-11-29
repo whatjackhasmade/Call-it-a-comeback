@@ -21,16 +21,16 @@ const settings = {
 }
 
 type TestimonialsProps = {
-  testimonials: object[]
+  testimonials?: []
 }
 
 type TestimonialProps = {
   author: string
-  logo: string
+  logo?: string
   media: {
     mediaItemUrl: string
   }
-  role: string
+  role?: string
   testimonial: string
 }
 
@@ -40,16 +40,19 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
 
   const nextTestimonial = e => {
     e.preventDefault()
-    sliderImages.current.slickNext()
-    sliderTestimonials.current.slickNext()
+    if (sliderImages) sliderImages.current.slickNext()
+    if (sliderImages) sliderTestimonials.current.slickNext()
   }
+
+  console.log(testimonials)
+  return null
 
   return (
     <TestimonialsComponent>
       <div className="testimonial__media">
         <Slider ref={sliderImages} {...settings}>
           {testimonials.map(
-            ({ author, media }): TestimonialProps => (
+            ({ author, media, testimonial }: TestimonialProps) => (
               <img src={media.mediaItemUrl} alt={author} key={author} />
             )
           )}
@@ -82,4 +85,5 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
   )
 }
 
-export default Testimonials
+const Test = () => <p>test</p>
+export default Test

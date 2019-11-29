@@ -9,12 +9,17 @@ export const useQueryPosts = () => {
             nodes {
               id
               date
+              featuredImage {
+                altText
+                md: sourceUrl(size: FEATURED_MD)
+              }
               seo {
                 metaDesc
                 title
               }
               slug
               title
+              uri
             }
           }
         }

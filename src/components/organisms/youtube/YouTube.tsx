@@ -1,6 +1,8 @@
 import React from "react"
+import Img from "gatsby-image/withIEPolyfill"
 import YouTube from "react-youtube"
 import useQueryYouTube from "../../particles/hooks/useQueryYouTube"
+import useQueryYouTubeImages from "../../particles/hooks/images/useQueryYouTubeImages"
 
 import backgroundLeft from "./youtube-left.png"
 import backgroundRight from "./youtube-right.png"
@@ -18,6 +20,7 @@ const opts = {
 type YouTubeChannelProps = {}
 
 const YouTubeChannel = ({}: YouTubeChannelProps) => {
+  const backgroundImages = useQueryYouTubeImages()
   const channelVideos = useQueryYouTube()
 
   const _onReady = event => {
@@ -25,18 +28,45 @@ const YouTubeChannel = ({}: YouTubeChannelProps) => {
     event.target.pauseVideo()
   }
 
+  console.log(backgroundImages)
+
   return (
     <YouTubeComponent>
-      <img
-        alt=""
-        className="youtube__background youtube__background--left"
-        src={backgroundLeft}
-      />
-      <img
-        alt=""
-        className="youtube__background youtube__background--right"
-        src={backgroundRight}
-      />
+      {backgroundImages && backgroundImages.left && backgroundImages.right ? (
+        <>
+          <div className="youtube__background youtube__background--left">
+            <Img
+              fluid={backgroundImages.left.childImageSharp.fluid}
+              imgStyle={{
+                objectFit: "contain",
+              }}
+              objectFit="contain"
+            />
+          </div>
+          <div className="youtube__background youtube__background--right">
+            <Img
+              fluid={backgroundImages.right.childImageSharp.fluid}
+              imgStyle={{
+                objectFit: "contain",
+              }}
+              objectFit="contain"
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <img
+            alt=""
+            className="youtube__background youtube__background--left"
+            src={backgroundLeft}
+          />
+          <img
+            alt=""
+            className="youtube__background youtube__background--right"
+            src={backgroundRight}
+          />
+        </>
+      )}
       <div className="youtube__content">
         <div className="youtube__intro">
           <h2>My YouTube Channel</h2>

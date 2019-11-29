@@ -7,7 +7,7 @@ import Hero from "../organisms/hero/Hero"
 import Intro from "../organisms/intro/Intro"
 import Presentations from "../organisms/presentations/Presentations"
 import Row from "../organisms/row/Row"
-import Testimonials from "../organisms/testimonials/Testimonials"
+import TestimonialsComponent from "../organisms/testimonials/Testimonials"
 import YouTube from "../molecules/embed/youtube/YouTube"
 import YouTubeChannel from "../organisms/youtube/YouTube"
 import ParseHTML from "./ParseHTML"
@@ -19,7 +19,7 @@ const components = {
   intro: Intro,
   presentations: Presentations,
   row: Row,
-  testimonials: Testimonials,
+  // testimonials: TestimonialsComponent,
   youtube: YouTube,
   youtubechannel: YouTubeChannel,
 }
@@ -72,8 +72,6 @@ const ComponentParser = props => {
         />
       )
     })
-
-    console.log(pageComponents)
 
     if (pageComponents) {
       return pageComponents
