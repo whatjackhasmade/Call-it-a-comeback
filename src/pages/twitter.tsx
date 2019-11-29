@@ -46,3 +46,5 @@ const Twitter = () => {
     </Base>
   )
 }
+
+export default Twitter
