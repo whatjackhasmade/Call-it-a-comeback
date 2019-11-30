@@ -67,15 +67,16 @@
     "typescript": "^3.7.2"
   },
   "scripts": {
-    "type-check": "tsc --noEmit",
-    "lint": "tslint --project .",
     "build": "gatsby build",
+    "clean": "gatsby clean",
     "d": "npm run develop",
     "develop": "gatsby develop -o",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "lint": "tslint --project .",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "type-check": "tsc --noEmit"
   },
   "browerslist": [
     "last 2 versions"
