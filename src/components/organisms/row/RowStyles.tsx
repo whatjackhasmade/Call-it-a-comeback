@@ -175,8 +175,8 @@ const RowComponent = styled.section`
         opacity: 0;
         transform: ${props =>
           props.align === "right" ? "translateX(-100%)" : "translateX(100%)"};
-        transition: 1s all ease;
-        transition-delay: 0.4s;
+        transition: 1s all ease !important;
+        transition-delay: 0.4s !important;
       }
     }
   }
