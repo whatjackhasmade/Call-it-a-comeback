@@ -1,7 +1,8 @@
 import React from "react"
+import Img from "gatsby-image/withIEPolyfill"
 import Link from "gatsby-link"
 import { InView } from "react-intersection-observer"
-import { decodeHTML } from "../../helpers"
+import { decodeHTML, isFluid } from "../../helpers"
 
 import { RelatedItem, RelatedWrapper } from "./RelatedStyles"
 
@@ -33,15 +34,34 @@ const Related = ({
               {({ inView, ref }) => (
                 <RelatedItem ref={ref}>
                   <Link to={`/${item.uri}`}>
-                    <ImageLoader
-                      src={item.featuredImage.md}
-                      alt={
-                        item.featuredImage.altText
-                          ? item.featuredImage.altText
-                          : item.title
-                      }
-                      className="related__media"
-                    />
+                    {isFluid(item.featuredImage) ? (
+                      <Img
+                        alt={
+                          item.featuredImage.altText
+                            ? item.featuredImage.altText
+                            : item.title
+                        }
+                        className="related__media related__media--gatsby"
+                        fluid={
+                          item.featuredImage.imageFile.childImageSharp.fluid
+                        }
+                        imgStyle={{
+                          objectFit: "cover",
+                        }}
+                        objectFit="cover"
+                      />
+                    ) : (
+                      <div className="related__media related__media--fallback">
+                        <ImageLoader
+                          alt={
+                            item.featuredImage.altText
+                              ? item.featuredImage.altText
+                              : item.title
+                          }
+                          src={item.featuredImage.md}
+                        />
+                      </div>
+                    )}
                     {item.title && <h3>{decodeHTML(item.title)}</h3>}
                     {item.seo.metaDesc && <p>{item.seo.metaDesc}</p>}
                   </Link>

@@ -37,8 +37,31 @@ export const RelatedItem = styled.div`
   a {
     color: inherit;
     text-decoration: none;
+  }
 
-    > div {
+  .related__media {
+    overflow: hidden;
+
+    img {
+      transform: scale(1);
+      transition: 0.4s transform ease;
+    }
+  }
+
+  &:hover {
+    .related__media {
+      img {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .related__media--gatsby > div {
+    padding-bottom: 56.25% !important; /* your aspect ratio */
+  }
+
+  .related__media--fallback {
+    & > div {
       height: 0;
       overflow: hidden;
       padding-top: 56.25%;
@@ -54,17 +77,6 @@ export const RelatedItem = styled.div`
 
         object-fit: cover;
       }
-    }
-  }
-
-  .related__media {
-    transform: scale(1);
-    transition: 0.4s transform ease;
-  }
-
-  &:hover {
-    .related__media {
-      transform: scale(1.05);
     }
   }
 `
