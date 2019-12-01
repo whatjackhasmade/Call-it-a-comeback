@@ -1,5 +1,7 @@
 import React from "react"
+import Img from "gatsby-image/withIEPolyfill"
 import ParseHTML from "../../particles/ParseHTML"
+import { isFluid } from "../../helpers"
 
 import Duotone from "./Duotone"
 import HeroComponent from "./HeroStyles"
@@ -15,6 +17,17 @@ type HeroProps = {
   maxWidth?: string
   media?: {
     altText: string
+    imageFile?: {
+      childImageSharp?: {
+        fluid?: {
+          aspectRatio: number
+          base64: string
+          sizes: string
+          src: string
+          srcSet: string
+        }
+      }
+    }
     mediaItemUrl: string
   }
   overlay?: boolean
@@ -24,7 +37,21 @@ type HeroMediaProps = {
   alt: string
   background?: string
   duotone: boolean
-  media: string
+  media?: {
+    altText: string
+    imageFile?: {
+      childImageSharp?: {
+        fluid?: {
+          aspectRatio: number
+          base64: string
+          sizes: string
+          src: string
+          srcSet: string
+        }
+      }
+    }
+    mediaItemUrl: string
+  }
   overlay?: boolean
 }
 
@@ -61,7 +88,7 @@ const Hero = ({
             alt={media.altText}
             background={background_colour}
             duotone={duotone}
-            media={media.mediaItemUrl}
+            media={media}
             overlay={overlay}
           />
         )}
@@ -80,12 +107,30 @@ const HeroMedia = ({
   <HeroMediaComponent background={background} overlay={overlay}>
     {duotone ? (
       <Duotone className="hero__media">
-        <img src={media} alt={alt} />
+        <HeroImage alt={alt} src={media} />
       </Duotone>
     ) : (
-      <img src={media} alt={alt} />
+      <HeroImage alt={alt} src={media} />
     )}
   </HeroMediaComponent>
+)
+
+const HeroImage = ({ alt, src }) => (
+  <div className="hero__media">
+    {isFluid(src) ? (
+      <Img
+        alt={alt}
+        className="hero__media--gatsby"
+        fluid={src.imageFile.childImageSharp.fluid}
+        imgStyle={{
+          objectFit: "cover",
+        }}
+        objectFit="cover"
+      />
+    ) : (
+      <img src={src.mediaItemUrl} alt={alt} />
+    )}
+  </div>
 )
 
 export default Hero
