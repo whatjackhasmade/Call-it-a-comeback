@@ -1,7 +1,9 @@
 import React, { useRef } from "react"
+import Img from "gatsby-image/withIEPolyfill"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick"
+import { isFluid } from "../../helpers"
 
 import IconAngleRight from "../../../assets/images/icons/solid/angle-right.svg"
 
@@ -21,7 +23,7 @@ const settings = {
 }
 
 type TestimonialsProps = {
-  testimonials?: []
+  testimonials: []
 }
 
 type TestimonialProps = {
@@ -44,17 +46,23 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
     if (sliderImages) sliderTestimonials.current.slickNext()
   }
 
-  console.log(testimonials)
-  return null
-
   return (
     <TestimonialsComponent>
       <div className="testimonial__media">
         <Slider ref={sliderImages} {...settings}>
           {testimonials.map(
-            ({ author, media, testimonial }: TestimonialProps) => (
-              <img src={media.mediaItemUrl} alt={author} key={author} />
-            )
+            ({ author, media, testimonial }: TestimonialProps) => {
+              if (isFluid(media))
+                return (
+                  <Img
+                    alt={author}
+                    fluid={media.imageFile.childImageSharp.fluid}
+                    key={author}
+                  />
+                )
+
+              return <img src={media.mediaItemUrl} alt={author} key={author} />
+            }
           )}
         </Slider>
       </div>
@@ -85,5 +93,4 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
   )
 }
 
-const Test = () => <p>test</p>
-export default Test
+export default Testimonials

@@ -1,5 +1,4 @@
 import React from "react"
-import Link from "gatsby-link"
 import { InView } from "react-intersection-observer"
 import ReactBreakpoints, { Media } from "react-breakpoints"
 
@@ -13,8 +12,6 @@ import CaseRow from "./CaseRow"
 import CaseYouTube from "./CaseYouTube"
 
 import Base from "../Base"
-
-import ImageLoader from "../../molecules/imageloader/ImageLoader"
 
 import Intro from "../../organisms/intro/Intro"
 import Related from "../../organisms/related/Related"
@@ -79,6 +76,8 @@ const CaseTemplate = ({
     return { ...testimonial.testimonial }
   })
 
+  console.log(processedTestimonials)
+
   let gallery_one = []
   let gallery_two = []
   let gallery_three = []
@@ -105,8 +104,6 @@ const CaseTemplate = ({
   for (i = 10; i < gallery.length; i++) {
     gallery_six.push(gallery[i])
   }
-
-  console.log({ ...intro })
 
   return (
     <ReactBreakpoints breakpoints={breakpoints}>
@@ -194,9 +191,9 @@ const CaseTemplate = ({
             {blocks.length > 6 && <CaseRow data={blocks[6].fields} />}
           </>
         )}
-        {/* {testimonials[0] && (
+        {testimonials[0] && (
           <Testimonials testimonials={processedTestimonials} />
-        )} */}
+        )}
         {related[0] && (
           <Related data={related} title="Continue Viewing My Case Studies" />
         )}
