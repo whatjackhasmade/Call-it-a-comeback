@@ -19,7 +19,7 @@ const components = {
   intro: Intro,
   presentations: Presentations,
   row: Row,
-  // testimonials: TestimonialsComponent,
+  testimonials: TestimonialsComponent,
   youtube: YouTube,
   youtubechannel: YouTubeChannel,
 }
