@@ -77,6 +77,10 @@ const RowComponent = styled.section`
     margin-bottom: 0;
   }
 
+  .row__media--gatsby > div {
+    padding-bottom: 56.25% !important; /* your aspect ratio */
+  }
+
   .row__column {
     width: 100%;
   }

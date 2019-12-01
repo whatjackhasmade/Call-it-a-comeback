@@ -1,6 +1,8 @@
 import React from "react"
+import Img from "gatsby-image/withIEPolyfill"
 import { InView } from "react-intersection-observer"
 import ParseHTML from "../../particles/ParseHTML"
+import { isFluid } from "../../helpers"
 
 import RowComponent from "./RowStyles"
 
@@ -46,7 +48,21 @@ const Row = ({ content, index, link, media }: RowProps) => {
 const RowMedia = ({ ext, media }) => (
   <div className="row__media">
     {ext !== `mp4` ? (
-      <ImageLoader src={media.mediaItemUrl} alt={media.altText} />
+      <>
+        {isFluid(media) ? (
+          <Img
+            alt={media.altText}
+            className="row__media--gatsby"
+            fluid={media.imageFile.childImageSharp.fluid}
+            imgStyle={{
+              objectFit: "cover",
+            }}
+            objectFit="cover"
+          />
+        ) : (
+          <ImageLoader src={media.mediaItemUrl} alt={media.altText} />
+        )}
+      </>
     ) : (
       <video
         src={media.mediaItemUrl}
