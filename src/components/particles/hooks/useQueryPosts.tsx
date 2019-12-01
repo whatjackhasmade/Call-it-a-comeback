@@ -11,6 +11,13 @@ export const useQueryPosts = () => {
               date
               featuredImage {
                 altText
+                imageFile {
+                  childImageSharp {
+                    fluid(maxWidth: 2560) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
                 md: sourceUrl(size: FEATURED_MD)
               }
               seo {

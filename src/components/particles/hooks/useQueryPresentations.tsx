@@ -15,6 +15,13 @@ export const useQueryPresentations = () => {
               }
               featuredImage {
                 altText
+                imageFile {
+                  childImageSharp {
+                    fluid(maxWidth: 2560) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
                 mediaItemUrl
                 xs: sourceUrl(size: FEATURED_XS)
                 sm: sourceUrl(size: FEATURED_SM)
