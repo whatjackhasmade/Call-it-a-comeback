@@ -342,6 +342,14 @@ const GlobalStyle = createGlobalStyle`
 		}
 	}
 
+	.wp-block-image {
+		text-align: center;
+
+		img {
+			margin: 0 auto;
+		}
+	}
+
 	.wp-block-embed-youtube {
 		.wp-block-embed__wrapper {
 			height: 0;

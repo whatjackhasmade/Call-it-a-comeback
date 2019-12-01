@@ -182,6 +182,17 @@ export const Article = styled.article`
   pre {
     margin: 32px auto !important;
   }
+
+  .wp-block-image {
+    text-align: center;
+
+    img,
+    picture,
+    video {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 `
 
 export const RelatedContainer = styled.section`
