@@ -1,5 +1,7 @@
 import React from "react"
+import Img from "gatsby-image/withIEPolyfill"
 import ParseHTML from "../../particles/ParseHTML"
+import { isFluid } from "../../helpers"
 
 import IntroComponent from "./IntroStyles"
 
@@ -44,11 +46,25 @@ const Intro = ({
           )}
         </div>
         {illustration && (
-          <img
-            className="intro__illustration"
-            src={illustration.mediaItemUrl}
-            alt={heading}
-          />
+          <>
+            {isFluid(illustration) ? (
+              <Img
+                alt={heading}
+                className="intro__illustration"
+                fluid={illustration.imageFile.childImageSharp.fluid}
+                imgStyle={{
+                  objectFit: "cover",
+                }}
+                objectFit="cover"
+              />
+            ) : (
+              <img
+                alt={heading}
+                className="intro__illustration"
+                src={illustration.mediaItemUrl}
+              />
+            )}
+          </>
         )}
       </IntroComponent>
     )
