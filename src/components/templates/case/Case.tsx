@@ -5,7 +5,7 @@ import ReactBreakpoints, { Media } from "react-breakpoints"
 
 import "html5-device-mockups/dist/device-mockups.min.css"
 
-import { Devices, RelatedContainer, RelatedItem } from "./CaseStyles"
+import { Devices } from "./CaseStyles"
 
 import CaseBreak from "./CaseBreak"
 import CaseGallery from "./CaseGallery"
@@ -17,6 +17,7 @@ import Base from "../Base"
 import ImageLoader from "../../molecules/imageloader/ImageLoader"
 
 import Intro from "../../organisms/intro/Intro"
+import Related from "../../organisms/related/Related"
 import Testimonials from "../../organisms/testimonials/Testimonials"
 
 const breakpoints = {
@@ -193,42 +194,15 @@ const CaseTemplate = ({
             {blocks.length > 6 && <CaseRow data={blocks[6].fields} />}
           </>
         )}
-        {testimonials[0] && (
+        {/* {testimonials[0] && (
           <Testimonials testimonials={processedTestimonials} />
+        )} */}
+        {related[0] && (
+          <Related data={related} title="Continue Viewing My Case Studies" />
         )}
-        {related[0] && <Related data={related} />}
       </Base>
     </ReactBreakpoints>
   )
 }
 
 export default CaseTemplate
-
-function Related({ data }) {
-  return (
-    <RelatedContainer>
-      <h2>Continue Viewing My Case Studies</h2>
-      <div className="related__items">
-        {data.map(item => (
-          <InView key={item.id} threshold={0} triggerOnce={true}>
-            {({ inView, ref }) => (
-              <RelatedItem ref={ref}>
-                <Link to={`/${item.uri}`}>
-                  <ImageLoader
-                    src={item.featuredImage.md}
-                    alt={item.title}
-                    className={`related__media`}
-                    loadedClassName={`related__media`}
-                    loadingClassName={`related__media`}
-                  />
-                  <h3>{item.title}</h3>
-                  <p>{item.seo.metaDesc}</p>
-                </Link>
-              </RelatedItem>
-            )}
-          </InView>
-        ))}
-      </div>
-    </RelatedContainer>
-  )
-}

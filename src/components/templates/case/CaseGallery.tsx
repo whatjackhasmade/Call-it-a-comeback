@@ -1,5 +1,7 @@
 import React from "react"
+import Img from "gatsby-image/withIEPolyfill"
 import { InView } from "react-intersection-observer"
+import { isFluid } from "../../helpers"
 
 import { GalleryContainer } from "./CaseStyles"
 
@@ -9,6 +11,17 @@ type CaseGalleryProps = {
   images: [
     {
       altText: string
+      imageFile?: {
+        childImageSharp?: {
+          fluid?: {
+            aspectRatio: number
+            base64: string
+            sizes: string
+            src: string
+            srcSet: string
+          }
+        }
+      }
       md: string
       mediaItemUrl: string
     }
@@ -31,13 +44,25 @@ const CaseGallery = ({ images, small }: CaseGalleryProps) => {
         >
           {images.map(image => (
             <div className="gallery__image__wrapper">
-              <div className="gallery__image">
-                <ImageLoader
+              {isFluid(image) ? (
+                <Img
                   alt={image.altText}
+                  fluid={image.imageFile.childImageSharp.fluid}
+                  imgStyle={{
+                    objectFit: "cover",
+                  }}
                   key={image.mediaItemUrl}
-                  src={image.md}
+                  objectFit="cover"
                 />
-              </div>
+              ) : (
+                <div className="gallery__image">
+                  <ImageLoader
+                    alt={image.altText}
+                    key={image.mediaItemUrl}
+                    src={image.md}
+                  />
+                </div>
+              )}
             </div>
           ))}
         </GalleryContainer>
