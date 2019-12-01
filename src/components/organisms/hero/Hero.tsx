@@ -6,7 +6,6 @@ import { isFluid } from "../../helpers"
 import Duotone from "./Duotone"
 import HeroComponent from "./HeroStyles"
 import HeroMediaComponent from "./HeroMediaStyles"
-import { string } from "prop-types"
 
 type HeroProps = {
   align?: string
@@ -117,7 +116,7 @@ const HeroMedia = ({
 
 const HeroImage = ({ alt, src }) => (
   <div className="hero__media">
-    {isFluid(src) ? (
+    {false ? (
       <Img
         alt={alt}
         className="hero__media--gatsby"
