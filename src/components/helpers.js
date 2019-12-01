@@ -9,6 +9,15 @@ export function decodeHTML(html) {
   })
 }
 
+/* TODO: Refactor when image?imageFile is possible */
+export function isFluid(image) {
+  if (!image) return false
+  if (!image.imageFile) return false
+  if (!image.imageFile.childImageSharp) return false
+  if (!image.imageFile.childImageSharp.fluid) return false
+  return true
+}
+
 export function httpTohttps(html) {
   return html.replace("http://", "https://")
 }

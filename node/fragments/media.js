@@ -1,5 +1,8 @@
+const fluidImageFields = require(`./gatsby/fluid`)
+
 const mediaFields = `
 	altText
+	${fluidImageFields}
 	mediaItemUrl
 	xs: sourceUrl(size: FEATURED_XS)
 	sm: sourceUrl(size: FEATURED_SM)
