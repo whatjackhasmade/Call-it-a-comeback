@@ -24,3 +24,5 @@ export const VideoGrid = styled.section`
     display: block;
   }
 `
+
+export default VideoGrid
