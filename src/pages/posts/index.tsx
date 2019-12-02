@@ -6,7 +6,7 @@ import { decodeHTML } from "../../components/helpers"
 
 import useQueryPosts from "../../components/particles/hooks/useQueryPosts"
 
-import { CollectionMenu, CollectionWrapper } from "./styles"
+import { CollectionMenu, CollectionWrapper } from "../../pages-styles/posts"
 
 import Base from "../../components/templates/Base"
 

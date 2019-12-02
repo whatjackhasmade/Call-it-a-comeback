@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import device from "../../components/particles/MediaQueries"
+import device from "../components/particles/MediaQueries"
 
 export const VideoGrid = styled.section`
   display: grid;
