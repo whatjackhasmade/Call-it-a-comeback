@@ -68,6 +68,7 @@
   },
   "scripts": {
     "build": "gatsby build",
+    "build-netlify": "gatsby build",
     "clean": "gatsby clean",
     "d": "npm run develop",
     "develop": "gatsby develop -o",
