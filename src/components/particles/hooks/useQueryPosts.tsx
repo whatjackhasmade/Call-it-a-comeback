@@ -13,12 +13,22 @@ export const useQueryPosts = () => {
                 altText
                 imageFile {
                   childImageSharp {
-                    fluid(maxWidth: 2560) {
-                      ...GatsbyImageSharpFluid
+                    fluid {
+                      aspectRatio
+                      base64
+                      sizes
+                      src
+                      srcSet
                     }
                   }
                 }
+                mediaItemUrl
+                xs: sourceUrl(size: FEATURED_XS)
+                sm: sourceUrl(size: FEATURED_SM)
                 md: sourceUrl(size: FEATURED_MD)
+                lg: sourceUrl(size: FEATURED_LG)
+                xl: sourceUrl(size: FEATURED_XL)
+                uri
               }
               seo {
                 metaDesc

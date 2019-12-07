@@ -18,7 +18,8 @@ module.exports = async ({ actions, graphql }) => {
 						${blocks.dribbble}
 						${blocks.github}
 						${blocks.hero}
-						${blocks.intro}
+            ${blocks.intro}
+						${blocks.link}
 						${blocks.presentations}
 						${blocks.row}
 						${blocks.testimonials}

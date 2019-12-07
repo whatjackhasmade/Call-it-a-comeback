@@ -13,8 +13,12 @@ export const useQueryInspiration = () => {
                   altText
                   imageFile {
                     childImageSharp {
-                      fluid(maxWidth: 2560) {
-                        ...GatsbyImageSharpFluid
+                      fluid {
+                        aspectRatio
+                        base64
+                        sizes
+                        src
+                        srcSet
                       }
                     }
                   }
