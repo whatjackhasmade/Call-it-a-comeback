@@ -5,6 +5,7 @@ import Dribbble from "../organisms/dribbble/Dribbble"
 import Github from "../organisms/github/Github"
 import Hero from "../organisms/hero/Hero"
 import Intro from "../organisms/intro/Intro"
+import Link from "../molecules/link/Link"
 import Presentations from "../organisms/presentations/Presentations"
 import Row from "../organisms/row/Row"
 import TestimonialsComponent from "../organisms/testimonials/Testimonials"
@@ -17,6 +18,7 @@ const components = {
   github: Github,
   hero: Hero,
   intro: Intro,
+  link: Link,
   presentations: Presentations,
   row: Row,
   testimonials: TestimonialsComponent,
