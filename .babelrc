@@ -1,0 +1,37 @@
+{
+  "presets": ["babel-preset-gatsby"],
+  "plugins": [
+    [
+      "prismjs",
+      {
+        "languages": [
+          "bash",
+          "css",
+          "git",
+          "graphql",
+          "handlebars",
+          "html",
+          "javascript",
+          "json",
+          "jsx",
+          "markup",
+          "nginx",
+          "php",
+          "pug",
+          "scss",
+          "sql",
+          "svg",
+          "toml",
+          "twig",
+          "typescript",
+          "tsx",
+          "xml",
+          "yaml"
+        ],
+        "plugins": ["show-language"],
+        "theme": "okaidia",
+        "css": true
+      }
+    ]
+  ]
+}
