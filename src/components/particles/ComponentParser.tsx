@@ -1,6 +1,7 @@
 import React from "react"
 import { isEmptyObject, randomID } from "../helpers"
 
+import Code from "../atoms/code/Code"
 import Dribbble from "../organisms/dribbble/Dribbble"
 import Github from "../organisms/github/Github"
 import Hero from "../organisms/hero/Hero"
@@ -14,16 +15,17 @@ import YouTubeChannel from "../organisms/youtube/YouTube"
 import ParseHTML from "./ParseHTML"
 
 const components = {
-  dribbble: Dribbble,
-  github: Github,
-  hero: Hero,
-  intro: Intro,
-  link: Link,
-  presentations: Presentations,
-  row: Row,
-  testimonials: TestimonialsComponent,
-  youtube: YouTube,
-  youtubechannel: YouTubeChannel,
+  "acf/code": Code,
+  "acf/dribbble": Dribbble,
+  "acf/github": Github,
+  "acf/hero": Hero,
+  "acf/intro": Intro,
+  "acf/link": Link,
+  "acf/presentations": Presentations,
+  "acf/row": Row,
+  "acf/testimonials": TestimonialsComponent,
+  "acf/youtube": YouTube,
+  "acf/youtubechannel": YouTubeChannel,
 }
 
 const convertACFProps = component => {
@@ -42,7 +44,6 @@ const sanatizeName = name => {
   if (!name) return null
   let newName = name
   newName = newName.replace("core-embed/", "")
-  newName = newName.replace("acf/", "")
   return newName
 }
 
