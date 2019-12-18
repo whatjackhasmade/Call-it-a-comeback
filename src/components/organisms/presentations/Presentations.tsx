@@ -49,8 +49,6 @@ type PresentationProps = {
 const Presentations = ({ content }: PresentationsProps) => {
   const presentations = useQueryPresentations()
 
-  console.log(presentations)
-
   return (
     <PresentationsComponent>
       <Intro

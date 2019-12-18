@@ -28,8 +28,6 @@ const YouTubeChannel = ({}: YouTubeChannelProps) => {
     event.target.pauseVideo()
   }
 
-  console.log(backgroundImages)
-
   return (
     <YouTubeComponent>
       {backgroundImages && backgroundImages.left && backgroundImages.right ? (

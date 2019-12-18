@@ -32,8 +32,6 @@ const YouTubeBlock = ({ attributes: { url }, children }: YouTubeProps) => {
     )
   }
 
-  console.log(YouTubeGetID(url))
-
   return (
     <YouTubeComponent>
       <div className="youtube__wrapper">

@@ -76,8 +76,6 @@ const CaseTemplate = ({
     return { ...testimonial.testimonial }
   })
 
-  console.log(processedTestimonials)
-
   let gallery_one = []
   let gallery_two = []
   let gallery_three = []
