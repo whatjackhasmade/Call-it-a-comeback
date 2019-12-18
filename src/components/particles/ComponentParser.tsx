@@ -41,13 +41,6 @@ const convertACFProps = component => {
   return component
 }
 
-const sanatizeName = name => {
-  if (!name) return null
-  let newName = name
-  newName = newName.replace("core-embed/", "")
-  return newName
-}
-
 const ComponentParser = props => {
   let { content } = props
 
@@ -59,8 +52,7 @@ const ComponentParser = props => {
 
   if (filteredComponents && filteredComponents.length > 0) {
     const pageComponents = filteredComponents.map((component, index) => {
-      const componentName = sanatizeName(component.name)
-      const Component = components[componentName]
+      const Component = components[component.name]
 
       if (!Component) return ParseHTML(component.originalContent)
 
