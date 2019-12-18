@@ -26,7 +26,7 @@ const components = {
   "acf/testimonials": TestimonialsComponent,
   "acf/youtube": YouTube,
   "acf/youtubechannel": YouTubeChannel,
-  "embed/youtube": YouTube,
+  "core-embed/youtube": YouTube,
 }
 
 const convertACFProps = component => {
