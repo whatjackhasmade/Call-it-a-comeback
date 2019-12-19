@@ -13,7 +13,8 @@ module.exports = async ({ actions, graphql }) => {
             isValid
 						name
 						originalContent
-						${blocks.code}
+            ${blocks.code}
+						${blocks.coreHeading}
             ${blocks.embedTwitter}
 						${blocks.embedYouTube}
 						${blocks.dribbble}

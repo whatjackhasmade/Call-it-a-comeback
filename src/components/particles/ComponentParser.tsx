@@ -2,6 +2,7 @@ import React from "react"
 import { isEmptyObject, randomID } from "../helpers"
 
 import Code from "../atoms/code/Code"
+import Heading from "../atoms/heading/Heading"
 import Dribbble from "../organisms/dribbble/Dribbble"
 import Github from "../organisms/github/Github"
 import Hero from "../organisms/hero/Hero"
@@ -26,6 +27,7 @@ const components = {
   "acf/testimonials": TestimonialsComponent,
   "acf/youtube": YouTube,
   "acf/youtubechannel": YouTubeChannel,
+  "core/heading": Heading,
   "core-embed/youtube": YouTube,
 }
 

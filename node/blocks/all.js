@@ -1,3 +1,5 @@
+const coreHeading = require(`./core/heading`)
+
 const embedTwitter = require(`./core/embedTwitter`)
 const embedYouTube = require(`./core/embedYouTube`)
 
@@ -15,6 +17,7 @@ const youtubeChannel = require(`./acf/youtubeChannel`)
 
 module.exports = {
   /* Core Blocks */
+  coreHeading,
   embedTwitter,
   embedYouTube,
 

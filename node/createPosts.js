@@ -14,6 +14,7 @@ module.exports = async ({ actions, graphql }) => {
 						name
 						originalContent
 						${blocks.code}
+						${blocks.coreHeading}
 						${blocks.embedTwitter}
 						${blocks.embedYouTube}
 						${blocks.dribbble}
