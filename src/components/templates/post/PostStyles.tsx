@@ -4,6 +4,27 @@ import { device } from "../../particles/MediaQueries"
 export const ArticleIntro = styled.header`
   max-width: 800px;
   margin: 64px auto;
+
+  .article__meta {
+    display: flex;
+    flex-direction: column;
+
+    @media ${device.sm} {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .article__meta__date {
+    margin: 16px 0;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    @media ${device.sm} {
+      margin: 0;
+    }
+  }
 `
 
 export const ArticleProgress = styled.div(
