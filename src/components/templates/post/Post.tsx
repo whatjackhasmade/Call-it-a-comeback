@@ -16,10 +16,7 @@ import Base from "../Base"
 
 type PostProps = {
   pageContext: {
-    blocks: []
-    content: string
-    date: string
-    PostFields: {
+    acf: {
       learn?: {
         items: [
           {
@@ -31,6 +28,9 @@ type PostProps = {
       }
       relatedPosts?: []
     }
+    blocks: []
+    content: string
+    date: string
     title: string
   }
 }
@@ -38,10 +38,10 @@ type PostProps = {
 const PostTemplate = ({
   pageContext,
   pageContext: {
+    acf: { learn, relatedPosts },
     blocks,
     content,
     date,
-    PostFields: { learn, relatedPosts },
     title,
   },
 }: PostProps) => {
@@ -49,6 +49,8 @@ const PostTemplate = ({
     // call the highlightAll() function to style our code blocks
     Prism.highlightAll()
   })
+
+  const lessons = learn.items
 
   return (
     <Base context={pageContext}>
@@ -63,15 +65,21 @@ const PostTemplate = ({
       </ArticleIntro>
       {blocks.length > 0 ? (
         <Article>
-          {learn && learn.items && learn.items.length && (
-            <OverviewList items={learn.items} title="What you will learn" />
+          {lessons && lessons.length && (
+            <OverviewList
+              items={lessons}
+              title={learn.title ? learn.title : "What you will learn"}
+            />
           )}
           <ComponentParser content={blocks} />
         </Article>
       ) : (
         <Article>
-          {learn && learn.items && learn.items.length && (
-            <OverviewList items={learn.items} title="What you will learn" />
+          {lessons && lessons.length && (
+            <OverviewList
+              items={lessons}
+              title={learn.title ? learn.title : "What you will learn"}
+            />
           )}
           {ParseHTML(content)}
         </Article>

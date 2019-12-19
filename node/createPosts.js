@@ -43,7 +43,14 @@ module.exports = async ({ actions, graphql }) => {
 					status
 					uri
 					title
-					PostFields {
+					acf: PostFields {
+						learn {
+							items {
+								id
+								value
+							}
+							title
+						}
 						relatedPosts {
 							... on WORDPRESS_Post {
 								id
