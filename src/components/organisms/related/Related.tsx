@@ -29,6 +29,7 @@ const Related = ({
     <div className="related__items">
       {data.map(
         item =>
+          item &&
           item.featuredImage && (
             <InView key={item.uri} threshold={0} triggerOnce={true}>
               {({ inView, ref }) => (
