@@ -36,7 +36,7 @@ exports.sourceNodes = async (
   const GAPI = process.env.GATSBY_GOOGLE_API
   const PlayListID = `UUIOm-HME4V_STS9yWM5aXIg`
   const NumberResults = 12
-  const youtubeURL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${PlayListID}&key=${GAPI}&maxResults=${NumberResults}`
+  const youtubeURL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PlayListID}&key=${GAPI}&maxResults=${NumberResults}`
   const youtubeResponse = await fetch(youtubeURL)
   const youtubeData = await youtubeResponse.json()
 
