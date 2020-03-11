@@ -16,6 +16,9 @@ const OverviewList = ({
   title = "What you will learn",
 }: OverviewListProps) => {
   if (!items) return null
+  items = items.filter(({ id, value }) => {
+    if (value) return true
+  })
   if (!items.length) return null
 
   return (
@@ -25,6 +28,7 @@ const OverviewList = ({
       </div>
       <ul className="overview-list__list">
         {items.map(({ id, value }) => {
+          if (!value) return null
           if (!id) return <li>{value}</li>
           return (
             <li>

@@ -3,9 +3,9 @@ import { useStaticQuery, graphql } from "gatsby"
 export default () => {
   const data = useStaticQuery(graphql`
     query {
-      blank: file(relativePath: { eq: "images/blank.jpg" }) {
+      blank: file(relativePath: { eq: "images/placeholder.png" }) {
         childImageSharp {
-          fluid(maxWidth: 2560) {
+          fluid(maxWidth: 250) {
             ...GatsbyImageSharpFluid
           }
         }

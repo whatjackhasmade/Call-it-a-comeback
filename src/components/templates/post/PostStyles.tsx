@@ -204,6 +204,11 @@ export const Article = styled.article`
     margin: 32px auto !important;
   }
 
+  :not(pre) > code[class*="language-"],
+  pre[class*="language-"] {
+    background-color: ${props => props.theme.black};
+  }
+
   .wp-block-image {
     text-align: center;
 

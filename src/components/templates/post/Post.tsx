@@ -45,10 +45,10 @@ const PostTemplate = ({
     title,
   },
 }: PostProps) => {
-  useEffect(() => {
-    // call the highlightAll() function to style our code blocks
-    Prism.highlightAll()
-  })
+  // useEffect(() => {
+  //   // call the highlightAll() function to style our code blocks
+  //   Prism.highlightAll()
+  // })
 
   const lessons = learn.items
 
